@@ -1,1 +1,11 @@
-aa
+Traccia
+Utente, più utente admin
+Relazione N a N tra Traccia e Utente, fascia oraria
+Brani preferiti (da vedere)
+Album composto da Tracce 
+Vedere bene Remastering
+Artista forse
+Chiedere identificativo traccia.
+Cover, non si può fare la cover di una traccia che non c'è nel db
+
+Cercare quanto è difficile fare un istogramma.
