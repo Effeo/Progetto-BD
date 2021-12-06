@@ -1,4 +1,4 @@
-Album(CodA, Titolo, AnnoU, Durata, NTracce, Etichetta)
+Album(CodA, Titolo, AnnoU, Durata, NTracce, Etichetta, Voto)
 
 Traccia(CodT, Durata, Etichetta, AnnoU, IsCover, IsRemastered, Genere, Link, Formato, Valutazione, Qualità, CodA)
 CodA -> Album.CodA
@@ -12,11 +12,16 @@ Ascolta(NickName, CodT, FasciaOraria)
 NickName -> Utente.NickName
 CodT -> Traccia.CodT
 
+
+Vota(NickName, CodT, Voto)
+NickName -> Utente.NickName
+CodT -> Traccia.Cod
+
 Contiene(CodP, CodT)
 CodP -> Playlist.CodP
 CodT -> Traccia.CodT
 
-Artista(NomeArte, Descrizione)
+Artista(NomeArte, Descrizione, Voto)
 
 Incide(NomeArte, CodA)
 NomeArte -> Artista.NomeArte
