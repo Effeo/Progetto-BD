@@ -1,6 +1,6 @@
 Album(CodA, Titolo, AnnoU, Durata, NTracce, Etichetta, Voto)
 
-Traccia(CodT, Durata, Etichetta, AnnoU, IsCover, IsRemastered, Genere, Link, Formato, Valutazione, Qualità, CodA)
+Traccia(CodT, Titolo, Durata, Etichetta, AnnoU, IsCover, IsRemastered, Genere, Link, Formato, Valutazione, Qualità, CodA)
 CodA -> Album.CodA
 
 Utente(NickName, Email, Password, DataN, Sesso, Nazionalità, Descrizione, IsPremium, IsAdmin)
