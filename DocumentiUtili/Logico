@@ -1,0 +1,27 @@
+Album(CodA, Titolo, AnnoU, Durata, NTracce, Etichetta)
+
+Traccia(CodT, Durata, Etichetta, AnnoU, IsCover, IsRemastered, Genere, Link, Formato, Valutazione, Qualità, CodA)
+CodA -> Album.CodA
+
+Utente(NickName, Email, Password, DataN, Sesso, Nazionalità, Descrizione, IsPremium, IsAdmin)
+
+Playlist(CodP, Titolo, Durata, NTracce, Visibilità, NickName)
+NickName -> Utente.NickName
+
+Ascolta(NickName, CodT, FasciaOraria)
+NickName -> Utente.NickName
+CodT -> Traccia.CodT
+
+Contiene(CodP, CodT)
+CodP -> Playlist.CodP
+CodT -> Traccia.CodT
+
+Artista(NomeArte, Descrizione)
+
+Incide(NomeArte, CodA)
+NomeArte -> Artista.NomeArte
+CodA -> Album.CodA
+
+Produce(NomeArte, CodT)
+NomeArte -> Artista.NomeArte
+CodT -> Traccia.Cod
