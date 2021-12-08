@@ -2,4 +2,45 @@ Utente:
 Sesso = Macschio o Femmina...
 Email: unico e dominio (prima delle tabelle)
 DataN : not null
-Nazionalità 
+Nazionalità : not null
+
+Playlist:
+Titolo: not null
+Visibilità : not null default false
+
+Traccia:
+Titolo: not null
+Durata: not null
+AnnoU: not null
+isCover: not null
+isRemastered: not null
+Genere : not null = Rock....
+Formato : not null = MP3... default MP3
+Qualità : not null 128 o ... default 128
+"Cover e/o remastered di tracce che NON sono presenti nel db"
+Se la traccia è remastered allora il formato è migliore
+Se è remastered l'anno deve essere maggiore
+Se è cover l'anno deve essere maggiore uguale dell'originale
+
+Album:
+Titolo : not null
+AnnoU: not null
+
+Voto:
+Voto da 1 a 5
+
+Ascolta:
+Fasce orarie da 24 ore diviso 4
+
+Vincoli interrelazionali:
+Un utente non premium non può ascoltare tracce di qualità maggiore a 128
+I voti delle tracce devono essere di utenti premium
+Se è cover l'artista deve essere diverso
+Se è cover l'album deve essere diverso
+
+Trigger:
+Quando un utente premium vota una traccia si fa la media dei voti, dell'album e delle tracce e dell'artista. (2 trigger)
+Aggiunta\eliminazione di tracce aumentare\diminuire il nuumero delle tracce nell'album e la durata
+(Parlare dell'eliminazione)
+Stessa cosa per playlist inclusa rimozione
+Cancellazioni artista comporta eliminazione di tracce e album
