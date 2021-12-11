@@ -4,8 +4,8 @@ CREATE TABLE ALBUM (
 	CodA SERIAL,
 	Titolo VARCHAR(50) NOT NULL,
 	AnnoU INTEGER,
-	Durata DOUBBLE DEFAULT NULL,
-	Ntracce INTEGER DEFAULT NULL,
+	Durata TIME DEFAULT '00:00:00',
+	Ntracce INTEGER DEFAULT 0,
 	Etichetta VARCHAR(20) DEFAULT NULL,
 	Voto INTEGER DEFAULT 0,
 	
@@ -15,48 +15,52 @@ CREATE TABLE ALBUM (
 
 CREATE TABLE TRACCIA (
 	CodT SERIAL,
-	Titolo VARCHAR(50) NOT NULL, --MANCA NEL LOGICO--
-	Durata DOUBBLE,
+	Titolo VARCHAR(50) NOT NULL,
+	Durata TIME NOT NULL,
 	Etichetta VARCHAR(20) DEFAULT NULL,
 	AnnoU INTEGER,
-	IsCover BOOLEAN,
-	IsRemastered BOOLEAN,
-	Genere VARCHAR(20),
-	Link VARCHAR(300), -per sicurezza-
-	Formato VARCHAR(20), --NON SONO SICURO--
-	Voto_medio INTEGER DEFAULT 0,
+	IsCover BOOLEAN DEFAULT FALSE,
+	IsRemastered BOOLEAN DEFAULT FALSE,
+	Genere VARCHAR(30),
+	Link VARCHAR(300),
+	Formato VARCHAR(4),
+	Voto INTEGER DEFAULT 0,
 	Qualita INTEGER,
 	CodA INTEGER DEFAULT NULL,
 	
 	
 	PRIMARY KEY (CodT),
-	FOREIGN KEY (CodA) REFERENCES Album(CodA)
+	FOREIGN KEY (CodA) REFERENCES Album(CodA),
 	
+	CHECK (Formato = 'MP3' or Formato = 'WAV' or Formato = 'FLAC'),
+	CHECK (Qualita = 128 or Qualita = 256 or Qualita = 512)
 );
 
 
 CREATE TABLE UTENTE (
 	NickName VARCHAR(20),
-	Email VARCHAR(25), -- farei un create domain prima per la mail
-	Password VARCHAR(10),
+	Email VARCHAR(100) NOT NULL,
+	Password VARCHAR(20) NOT NULL,
 	DataN DATE,
-	Sesso VARCHAR(15) DEFAULT NULL,
+	Sesso VARCHAR(15) NOT NULL,
 	Nazionalita VARCHAR(15) DEFAULT NULL,
 	Descrizione VARCHAR(100) DEFAULT NULL,
-	IsPremium BOOLEAN,
-	IsAdmin BOOLEAN,
+	IsPremium BOOLEAN DEFAULT FALSE,
+	IsAdmin BOOLEAN DEFAULT FALSE,
 
-	PRIMARY KEY (NickName)
-
+	PRIMARY KEY (NickName),
+	
+	CHECK (Email LIKE '%@%.%'),
+	CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' Sesso = 'Transgender' Sesso = 'Lampadina' or Sesso = 'Unicorno')
 );
 
 
 CREATE TABLE PLAYLIST(
 	CodP SERIAL,
 	Titolo VARCHAR(20),
-	Durata DOUBBLE,
-	NTracce, INTEGER,
-	Visibilita BOOLEAN,
+	Durata TIME DEFAULT '00:00:00',
+	NTracce INTEGER DEFAULT 0,
+	Visibilita BOOLEAN DEFAULT FALSE,
 	NickName VARCHAR(20),
 	
 	PRIMARY KEY (CodP),
@@ -66,61 +70,56 @@ CREATE TABLE PLAYLIST(
 
 CREATE TABLE ASCOLTA (
 	Nickname VARCHAR(20),
-	CodT INTEGER,
-	FasciaOraria INTEGER,
+	CodT SERIAL,
+	FasciaOraria VARCHAR(5),
 	
 	FOREIGN KEY (NickName) REFERENCES UTENTE(NickName),
-	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT)
+	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT),
 	
-	
-	);
+	CHECK(FasciaOraria = '00-06' or FasciaOraria = '06-12' or FasciaOraria = '12-18' or FasciaOraria = '18-00')
+);
 
 CREATE TABLE VOTA (
 	NickName VARCHAR(20),
-	CodT INTEGER,
-	Voto INTEGER,
+	CodT SERIAL,
+	Voto INTEGER NOT NULL,
+	
 	FOREIGN KEY (NickName) REFERENCES UTENTE(NickName),
-	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT)		
-
+	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT),	
+	
+	CHECK(Voto >= 1 and Voto <= 5)
 );
 
 
 CREATE TABLE CONTIENE (
-	CodP INTEGER,
-	CodT INTEGER,
+	CodP SERIAL,
+	CodT SERIAL,
 
 	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT),
 	FOREIGN KEY (CodP) REFERENCES PLAYLIST(CodP)
-	
 );
 
 
 CREATE TABLE ARTISTA (
-	NomeArte VARCHAR(20),
-	Descrizione VARCHAR(300) DEFAULT NULL, --vederemo---
-	Voto INTEGER,
+	NomeArte VARCHAR(30),
+	Descrizione VARCHAR(300) DEFAULT NULL,
+	Voto INTEGER DEFAULT 0,
 
 	PRIMARY KEY(NomeArte)
-
 );
 
 CREATE TABLE INCIDE (
-	NomeArte VARCHAR(20),
-	CodA INTEGER,
+	NomeArte VARCHAR(30),
+	CodA SERIAL,
 	
 	FOREIGN KEY (NomeArte) REFERENCES ARTISTA(NomeArte),
 	FOREIGN KEY (CodA) REFERENCES ALBUM(CodA)
-
-
 );
 
 CREATE TABLE PRODUCE (
-	NomeArte VARCHAR(20),
-	CodT INTEGER,
+	NomeArte VARCHAR(30),
+	CodT SERIAL,
 	
 	FOREIGN KEY (NomeArte) REFERENCES ARTISTA(NomeArte),
 	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT)
 );
-
-
-
