@@ -52,10 +52,13 @@ INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('Giorgio Vanni',DEFAULT,DEFAULT);
 
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
-VALUES ('Artisti Vari','Non mi pagano abbastanza per continuare',DEFAULT);
+VALUES ('Maneskin','E senno chi le fa le cover...',DEFAULT);
 
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
-VALUES ('Maneskin','E senno chi le fa le cover...',DEFAULT);
+VALUES ('Odeon Boys',DEFAULT,DEFAULT);
+
+INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
+VALUES ('Artisti Vari','Non mi pagano abbastanza per continuare',DEFAULT);
 
 
 
@@ -388,4 +391,44 @@ Values(Effeo,'francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002/01/20',
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
 Values(IMSORRY,'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0);
 
+-- Associamo agli album gli artisti --
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('ColdPlay',1);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('USA for Africa',2);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Boney M.',3);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Squallor',4);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Daft Punk',5);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Molchat Doma',6);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Paul Kalkbrenner',7);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Randy Newman',8);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Camille',8);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Cristina Davena',9);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Giorgio Vanni',9);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Odeon Boys',9);
+
+INSERT INTO INCIDE (NomeArte,CodA)
+Values('Maneskin',10);
 
