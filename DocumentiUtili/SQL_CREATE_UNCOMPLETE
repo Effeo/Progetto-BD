@@ -22,7 +22,7 @@ CREATE TABLE TRACCIA (
 	IsCover BOOLEAN,
 	IsRemastered BOOLEAN,
 	Genere VARCHAR(20),
-	Link VARCHAR(100),
+	Link VARCHAR(300), -per sicurezza-
 	Formato VARCHAR(20), --NON SONO SICURO--
 	Voto_medio INTEGER DEFAULT 0,
 	Qualita INTEGER,
