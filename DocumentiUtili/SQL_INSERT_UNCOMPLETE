@@ -377,19 +377,19 @@ VALUES('Begin','00:03:31',DEFAULT,2020,1,1,'Rock','https://open.spotify.com/trac
 -- Inseriamo ora gli Utenti -- 
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values(Rami_Malek,'silvio.barra@unina.it','I@mMrR0bot',1991/01/01,'Uomo',DEFAULT,'Google is the way',1,1);
+Values('Rami', 'MaleK', 'Rami_Malek','silvio.barra@unina.it','I@mMrR0bot',1991/01/01,'Uomo',DEFAULT,'Google is the way',1,1);
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values(King_of_Procida,'porfirio.tramontata@unina.it','ForzaNapoli',1990/01/01,'Uomo',DEFAULT,'Facciamo pausa dai',1,1);
+Values('Porfirio', 'Tramontana','King_of_Procida','porfirio.tramontata@unina.it','ForzaNapoli',1990/01/01,'Uomo',DEFAULT,'Facciamo pausa dai',1,1);
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values(Lord_Pino,'al.laino@studenti.unina.it','1q2w3e4r5t',1995/08/21,'Lampadina',DEFAULT,'Che bello popolare le basi di dati...Quanto mi rilassa...',1,0);
+Values('Alfredo', 'Laino', 'Lord_Pino','al.laino@studenti.unina.it','1q2w3e4r5t',1995/08/21,'Lampadina',DEFAULT,'Che bello popolare le basi di dati...Quanto mi rilassa...',1,0);
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values(Effeo,'francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002/01/20','Unicorno',DEFAULT,'Sono il terzo Francesco Orlando di UNINA,tutto apposto...',1,0);
+Values('Francesco', 'Orlando', 'Effeo','francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002/01/20','Unicorno',DEFAULT,'Sono il terzo Francesco Orlando di UNINA,tutto apposto...',1,0);
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values(IMSORRY,'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0);
+Values('Marco', 'Pastore', 'IMSORRY', 'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0);
 
 -- Associamo agli album gli artisti --
 
