@@ -52,7 +52,7 @@ CREATE TABLE UTENTE (
 
 	PRIMARY KEY (NickName),
 	
-	CHECK (Email LIKE '%@%.%'),
+	CHECK (Email LIKE '_%@_%._%'),
 	CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' Sesso = 'Transgender' Sesso = 'Lampadina' or Sesso = 'Unicorno')
 );
 
