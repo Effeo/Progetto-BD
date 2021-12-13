@@ -327,10 +327,10 @@ VALUES('Pokemon','00:03:20',DEFAULT,2014,0,0,'Cartoon','https://open.spotify.com
 -- Popolati gli album, creiamo alcune tracce senza album (ed alcune Cover)
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Luniversita fa male','00:00:28',DEFAULT,2021,0,0,'Arte','https://www.youtube.com/watch?v=3EwoYhuYKZs','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Easter egg','00:01:42',DEFAULT,2021,0,0,'Arte','https://open.spotify.com/track/1dwTG4PVhiWzeu0fUfMMMb?si=8e6406c15b2d42d0','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('INNO Salernitana','00:03:51',DEFAULT,2021,0,0,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Easter egg2','00:03:51',DEFAULT,2021,0,0,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
 VALUES('Napoli','00:03:20',DEFAULT,1998,0,0,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
@@ -373,6 +373,11 @@ VALUES('Viva La Vida','00:04:02',DEFAULT,2008,1,1,'Classica','https://open.spoti
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
 VALUES('Begin','00:03:31',DEFAULT,2020,1,1,'Rock','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','FLAC',DEFAULT,512,10);
 
+--Aggiunte dopo--
+
+INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
+VALUES('Holly e benji','00:03:04',DEFAULT,2020,1,1,'Cartoon','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','WAV',DEFAULT,512,DEFAULT);
+
 
 -- Inseriamo ora gli Utenti -- 
 
@@ -389,7 +394,7 @@ INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,I
 Values('Francesco', 'Orlando', 'Effeo','francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002/01/20','Unicorno',DEFAULT,'Sono il terzo Francesco Orlando di UNINA,tutto apposto...',1,0);
 
 INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Marco', 'Pastore', 'IMSORRY', 'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0);
+Values('Marco', 'Pastore', 'ElPator', 'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0); --Cute--
 
 -- Associamo agli album gli artisti --
 
@@ -431,4 +436,295 @@ Values('Odeon Boys',9);
 
 INSERT INTO INCIDE (NomeArte,CodA)
 Values('Maneskin',10);
+
+--Associamo ad ogni traccia il suo artista --
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',1);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',2);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',3);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',4);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',5);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',6);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',7);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',8);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',9);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',10);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',11);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',12);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Coldpay',13);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Coldpay',14);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',15);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',16);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',17);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',18);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',19);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',20);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',21);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',22);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',23);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',24);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',25);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',26);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',27);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',28);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',29);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('ColdPlay',30);
+
+INSERT INTO PRODUCE(NomeArte,Cod T)
+VALUES('USA for Africa,31);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',32);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',33);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',34);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',35);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',36);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',37);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',38);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',39);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Boney M.',40);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Squallor',41);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Squallor',42);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Squallor',43);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',44);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',45);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',46);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',47);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',48);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',49);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',50);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',51);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Daft Punk',52);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',53);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',54);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',55);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',56);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',57);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Molchat Doma',58);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Paul Kalbrenner',59);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Paul Kalbrenner',60);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Paul Kalbrenner',61);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Randy Newman',62);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Camille',63);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Odeon Boys',64);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Cristina Davena',65);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Giorgio Vanni',66);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Silvio Barra',67);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Silvio Barra',68);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Artisti Vari',69); --Nice --
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Artisti vari',70);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Imagine Dragons',71);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Yasuha',72);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('1-800 GIRLS',73);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Lo straqen',74);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('OEL',75);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Artisti Vari',76);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Maneskin',77);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Maneskin',78);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Maneskin',79);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Maneskin',80);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Maneskin',81);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Cristina Davena',82);
+
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('Giorgio Vanni',82);
+
+-- Associamo ora gli album ai rispettivi artisti -- 
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('ColdPlay',1);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('USA for Africa',2);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Boney M.',3);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Squallor',4);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Daft Punk',5);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Molchat Doma',6);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Paul Kalkbrenner',7);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Randy Newman',8);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Camille',8);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Cristina Davena',9);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Giorgio Vanni',9);
+
+INSERT INTO INCIDE(NomeArte,CodA)
+VALUES('Maneskin',10);
+
+
 
