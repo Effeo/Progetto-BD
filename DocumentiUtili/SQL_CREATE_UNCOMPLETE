@@ -53,7 +53,7 @@ CREATE TABLE UTENTE (
 	PRIMARY KEY (NickName),
 	
 	CHECK (Email LIKE '_%@_%._%'),
-	CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' Sesso = 'Transgender' Sesso = 'Lampadina' or Sesso = 'Unicorno')
+	CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' or Sesso = 'Transgender'or Sesso = 'Lampadina' or Sesso = 'Unicorno')
 );
 
 
@@ -78,7 +78,7 @@ CREATE TABLE ASCOLTA (
 	FOREIGN KEY (NickName) REFERENCES UTENTE(NickName),
 	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT),
 	
-	CHECK(FasciaOraria = '00-06' or FasciaOraria = '06-12' or FasciaOraria = '12-18' or FasciaOraria = '18-00')
+	CHECK(FasciaOraria = '00-06' or FasciaOraria = '06-12' or FasciaOraria = '12-18' or FasciaOraria = '18-00') -- vediamo di metterili interi e poi riconverti in fase di view nel aplicativo--
 );
 
 CREATE TABLE VOTA (
