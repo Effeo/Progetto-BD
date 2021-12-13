@@ -30,13 +30,14 @@ Voto:
 Voto da 1 a 5
 
 Ascolta:
-Fasce orarie da 24 ore diviso 4
+Fasce orarie da 24 ore diviso 6
 
 Vincoli interrelazionali:
 Un utente non premium non può ascoltare tracce di qualità maggiore a 128
 I voti delle tracce devono essere di utenti premium
 Se è cover l'artista deve essere diverso
 Se è cover l'album deve essere diverso
+Se viene inserita una nuova traccia bisogna controllare che non esiste un'altra traccia con lo stesso nome, anno, artista
 
 Trigger:
 Quando un utente premium vota una traccia si fa la media dei voti, dell'album e delle tracce e dell'artista. (2 trigger)
