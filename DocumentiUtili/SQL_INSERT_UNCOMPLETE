@@ -92,7 +92,7 @@ INSERT INTO ALBUM (Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
 VALUES('Italia 1',2020,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
 INSERT INTO ALBUM (Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
-VALUES('Fantasy',2021,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
+VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
 
 
@@ -359,16 +359,16 @@ VALUES('Dan Dan','00:03:30',DEFAULT,1995,0,0,'Cartoon','https://open.spotify.com
 -- Passiamo alle tracce dei Maneskin...ops le cover--
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Tanzevat','00:03:22',DEFAULT,2018,1,0,'American After-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,DEFAULT);
+VALUES('Tanzevat','00:03:22',DEFAULT,2023,1,0,'American After-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,1,0,'Neomelodico','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,DEFAULT);
+VALUES('Loose your self to dance','00:05:53',DEFAULT,2023,1,0,'Neomelodico','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Curnutone','00:04:12',DEFAULT,1981,1,0,'Meeelano','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,DEFAULT);
+VALUES('Curnutone','00:04:12',DEFAULT,2023,1,0,'Meeelano','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Viva La Vida','00:04:02',DEFAULT,2008,1,1,'Classica','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Viva La Vida','00:04:02',DEFAULT,2023,1,1,'Classica','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
 VALUES('Begin','00:03:31',DEFAULT,2020,1,1,'Rock','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','FLAC',DEFAULT,512,10);
