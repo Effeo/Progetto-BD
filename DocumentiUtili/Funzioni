@@ -8,11 +8,13 @@ BEGIN
 	Where new.CodT = Traccia.CodT;
 	
 	Select IsPremium into IsPremium1
-		From Utente
-		Where new.NickName = Utente.NickName;
-		
-	if(Qualita1 > 128 and not IsPremium) then
+	From Utente
+	Where new.NickName = Utente.NickName;
+	
+	raise notice '% %', qualita1, IsPremium1;
+	if(Qualita1 > 128 and not IsPremium1) then
 		Delete From Ascolta Where Ascolta.CodT = new.CodT;
 	end if;
+	Return null;
 END;
 $$ Language plpgsql;
