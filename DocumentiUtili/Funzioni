@@ -1,15 +1,18 @@
-Create or replace Function UtentePremium() returns Trigger as $$
+Create or replace Function UtentePremium() returns Trigger as $AscoltiNoPremium$
 DECLARE
 	Qualita1 Traccia.Qualita%TYPE;
 	IsPremium1 Utente.IsPremium%TYPE;
 BEGIN
+	raise notice '% %', tg_argv[0], tg_argv[1];
 	Select Qualita into Qualita1
 	From Traccia
-	Where new.CodT = Traccia.CodT;
+	Where CAST(tg_argv[0] AS INTEGER) = Traccia.CodT;
+	
+	
 	
 	Select IsPremium into IsPremium1
 	From Utente
-	Where new.NickName = Utente.NickName;
+	Where TG_argv[1] = Utente.NickName;
 	
 	raise notice '% %', qualita1, IsPremium1;
 	if(Qualita1 > 128 and not IsPremium1) then
@@ -17,4 +20,4 @@ BEGIN
 	end if;
 	Return null;
 END;
-$$ Language plpgsql;
+$AscoltiNoPremium$ Language plpgsql;
