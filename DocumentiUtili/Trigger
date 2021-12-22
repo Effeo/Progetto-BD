@@ -1,18 +1,2 @@
-Create or replace Function UtentePremium() returns Trigger as $$
-DECLARE
-	Qualita1 Traccia.Qualita%TYPE;
-	IsPremium1 Utente.IsPremium%TYPE;
-BEGIN
-	Select Qualita into Qualita1
-	From Traccia
-	Where new.CodT = Traccia.CodT;
-	
-	Select IsPremium into IsPremium1
-		From Utente
-		Where new.NickName = Utente.NickName;
-		
-	if(Qualita1 > 128 and not IsPremium) then
-		Delete From Ascolta Where Ascolta.CodT = new.CodT;
-	end if;
-END;
-$$ Language plpgsql;
+Create Trigger AscoltiNoPremium After Insert on Ascolta
+Execute procedure UtentePremium();
