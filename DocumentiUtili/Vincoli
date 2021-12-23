@@ -55,7 +55,7 @@ I voti delle tracce devono essere di utenti premium. Utente e vota.
 Se è cover l'artista deve essere diverso. Artista e traccia. 
 
 Trigger:
-Quando un utente premium vota una traccia si fa la media dei voti, dell'album e delle tracce e dell'artista. (2 trigger)
-Aggiunta\eliminazione di tracce aumentare\diminuire il nuumero delle tracce , la durata e i voti in album e in artista
+Quando un utente premium vota una traccia si fa la media dei voti, dell'album e delle tracce e dell'artista. (2 trigger) X
+Aggiunta\eliminazione di tracce aumentare\diminuire il nuumero delle tracce , la durata e i voti in album e in artista X(solo aggiunta)
 Stessa cosa per playlist inclusa rimozione
 Cancellazioni artista comporta eliminazione di tracce e album
