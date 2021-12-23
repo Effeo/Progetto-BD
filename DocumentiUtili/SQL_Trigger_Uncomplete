@@ -7,12 +7,12 @@
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia() RETURNS TRIGGER AS $Voto_Traccia$
 BEGIN
 	UPDATE TRACCIA
-	SET VOTO=(SELECT AVG(V.Vota)
+	SET VOTO=(SELECT AVG(V.Voto)
 		  FROM VOTA AS V
 		  WHERE V.CodT=NEW.CodT 
 		  GROUP BY V.CodT)
-	WHERE Cod.T=NEW.CodT;
-	RETURN XXX;
+	WHERE CodT=NEW.CodT;
+	RETURN Null;
 END; $Voto_Traccia$ LANGUAGE PLPGSQL;
 
 --Qualora l'utente(premium) volesse cambiare la propria opinione sul voto di una (o piu) tracce il voto deve essere modificato (al piu recente)
@@ -22,8 +22,8 @@ BEGIN
 	UPDATE VOTA
 	SET Voto=NEW.Voto
 	WHERE 	Vota.NickName=NEW.NickName AND Vota.CodT=NEW.CodT;
-	RETURN NEW;
-END; $Voto_Utente$ LANGUAGE PLSPGSQL;
+	RETURN NULL;
+END; $Voto_Utente$ LANGUAGE PLPGSQL;
 -- Ovviamente quando cambia il voto di un utente bisognera richiamare il trigger per cambiare la media dei voti della traccia scritto sopra
 
 --Passiamo ora alle modifiche relative agli album (necessarie dopo le modifiche dei voti delle tracce)
@@ -35,9 +35,9 @@ BEGIN
 		  FROM TRACCIA as T
 		  WHERE T.codA=NEW.codA
 		  GROUP BY T.CodT )
-	WHERE Cod.A=NEW.CodA;
-	RETURN XXX;
-END; $Voto_Album$ LANGUAGE PLSPGSQL
+	WHERE CodA=NEW.CodA;
+	RETURN Null;
+END; $Voto_Album$ LANGUAGE PLPGSQL
 
 --Passiamo ora alle modifiche relative agli artisti
 
@@ -53,24 +53,24 @@ BEGIN
 	WHERE NomeArte IN (SELECT NomeArte
 			   FROM PRODUCE AS P2
 			   WHERE P2.CodT=NEW.CodT);
-	RETURN XXX;
-END;$Voto_Artista$ LANGUAGE PLSPGSQL
+	RETURN NULL;
+END;$Voto_Artista$ LANGUAGE PLPGSQL
 
 --In conlusione andiamo a modificare i valori di media ntracce e durate per Album quando si aggiunge una traccia al Album
 
 CREATE OR REPLACE FUNCTION Agg_Traccia_Album() RETURNS TRIGGER AS $Agg_Album$
 BEGIN
 	UPDATE ALBUM
-	SET Ntracce=Ntracce+1,
-	    Durata=Durata + (SELECT Durata
+	SET Ntracce=Ntracce + 1,
+	    Durata=(SELECT sum(Durata)
 			     FROM TRACCIA AS T
-			     WHERE T.CodT=NEW.CodT),
+			     WHERE T.CodA=NEW.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
 		  WHERE T.CodA=NEW.CodA)
 	WHERE CodA=NEW.CodA;
-	RETURN XXX;
-END;$Agg_Album$
+	RETURN NULL;
+END;$Agg_Album$ LANGUAGE PLPGSQL
 
 -- Facciamo lo stesso in fase di rimozione di una Traccia da un Album
 
@@ -89,19 +89,17 @@ BEGIN
 END;$Rem_Album$
 
 --Passiamo alle Playlist (prima in aggiunta)
-
 CREATE OR REPLACE FUNCTION Agg_Traccia_Playlist() RETURNS TRIGGER AS $Agg_Playlist$
 BEGIN
 	UPDATE Playlist
 	SET NTracce=NTracce+1,
-	    Durata=Durata + (SELECT Durata
+	    Durata=(SELECT SUM(Durata)
 			     FROM TRACCIA AS T
-			     WHERE T.CodT=NEW.CodT)
+			     WHERE T.Codt=NEW.Codt)
 	    
 	WHERE CodP=NEW.CodP; 
-	RETURN XXX;
-
-END;$Agg_Playlist$
+	RETURN NULL;
+END;$Agg_Playlist$LANGUAGE PLPGSQL
 
 --Infine la rimozione
 
