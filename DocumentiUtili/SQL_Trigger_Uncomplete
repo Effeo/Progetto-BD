@@ -3,7 +3,7 @@
 
 
 -- Per prima cosa costruiamo una procedura che si occupa di aggiornare la media del voto di una traccia dopo che e' stata votata
-
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia() RETURNS TRIGGER AS $Voto_Traccia$
 BEGIN
 	UPDATE TRACCIA
@@ -16,7 +16,7 @@ BEGIN
 END; $Voto_Traccia$ LANGUAGE PLPGSQL;
 
 --Qualora l'utente(premium) volesse cambiare la propria opinione sul voto di una (o piu) tracce il voto deve essere modificato (al piu recente)
-
+--(DA CONTROLLARE)
 CREATE OR REPLACE FUNCTION Edit_Voto_Utente() RETURNS TRIGGER AS $Voto_Utente$
 BEGIN
 	UPDATE VOTA
@@ -27,7 +27,7 @@ END; $Voto_Utente$ LANGUAGE PLPGSQL;
 -- Ovviamente quando cambia il voto di un utente bisognera richiamare il trigger per cambiare la media dei voti della traccia scritto sopra
 
 --Passiamo ora alle modifiche relative agli album (necessarie dopo le modifiche dei voti delle tracce)
-
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Album() RETURNS TRIGGER AS $Voto_Album$
 BEGIN
 	UPDATE ALBUM
@@ -40,7 +40,7 @@ BEGIN
 END; $Voto_Album$ LANGUAGE PLPGSQL
 
 --Passiamo ora alle modifiche relative agli artisti
-
+--(CORRETTA MA NON PER PIU' ARTISTI)
 CREATE OR REPLACE FUNCTION Edit_Voto_Artista() RETURNS TRIGGER AS $Voto_Artista$
 BEGIN 
 	UPDATE ARTISTA
@@ -57,7 +57,7 @@ BEGIN
 END;$Voto_Artista$ LANGUAGE PLPGSQL
 
 --In conlusione andiamo a modificare i valori di media ntracce e durate per Album quando si aggiunge una traccia al Album
-
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Agg_Traccia_Album() RETURNS TRIGGER AS $Agg_Album$
 BEGIN
 	UPDATE ALBUM
@@ -73,7 +73,7 @@ BEGIN
 END;$Agg_Album$ LANGUAGE PLPGSQL
 
 -- Facciamo lo stesso in fase di rimozione di una Traccia da un Album
-
+--(DA CONTROLLARE)
 CREATE OR REPLACE FUNCTION Rem_Traccia_Album() RETURNS TRIGGER AS $Rem_Album$
 BEGIN
 	UPDATE ALBUM
@@ -89,6 +89,7 @@ BEGIN
 END;$Rem_Album$
 
 --Passiamo alle Playlist (prima in aggiunta)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Agg_Traccia_Playlist() RETURNS TRIGGER AS $Agg_Playlist$
 BEGIN
 	UPDATE Playlist
@@ -102,7 +103,7 @@ BEGIN
 END;$Agg_Playlist$LANGUAGE PLPGSQL
 
 --Infine la rimozione
-
+--(DA CONTROLLARE)
 CREATE OR REPLACE FUNCTION Rem_Traccia_Playlist() RETURNS TRIGGER AS $Rem_Playlist$
 BEGIN
 	UPDATE Playlist
@@ -118,14 +119,14 @@ END;$Rem_Playlist$
 -- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
 
 --Primo Trigger aggiorna la media di una Traccia
-
+--(CORRETTA)
 CREATE OR REPLACE TRIGGER Voto_Traccia_Media
 AFTER INSERT ON VOTA
 FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Traccia();
 
 -- Secondo Trigger aggiorna il voto conseguente ad una modifica da parte del utente
-
+--(DA CONREOLLARE)
 CREATE OR REPLACE TRIGGER Voto_Utente_Mod
 AFTER UPDATE OF Voto on VOTA
 FOR EACH ROW
@@ -133,55 +134,51 @@ EXECUTE PROCEDURE Edit_Voto_Utente();
 -- EXECUTE PROCEDURE Edit_Voto_Traccia();si puo fare senza che creo due trigger ?
 
 --Terzo Trigger modifica il Voto del Album,a fronte della modifica del voto della traccia
-
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Voto_Album_Mod
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Album();
 
 --Quarto Trigger modifica il Voto del Artista,a fronte della modifica del voto della traccia
-
+--(CORRETTO PER UN SOLO ARTISTA)
 CREATE OR REPLACE TRIGGER Voto_Artista_Mod
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Artista();
 
 -- Quinto Trigger si attiva quando aggiungiamo una traccia in un Album 
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Agg_Album_Mod
 AFTER INSERT ON TRACCIA --Album chaive esterna
 FOR EACH ROW
 EXECUTE PROCEDURE Agg_Traccia_Album();
 
 --Sesto Trigger si attiva quando rimuoviamo una traccia in un Album
+--(DA CONTROLLARE)
 CREATE OR REPLACE TRIGGER Rem_Album_Mod
 BEFORE DELETE ON TRACCIA --Album chaive esterna
 FOR EACH ROW
 EXECUTE PROCEDURE Rem_Traccia_Album();
 
 --Settimo Trigger in aggiunta di una Traccia in una Playlist
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Agg_Playlist_Mod
 AFTER INSERT ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Agg_Traccia_Playlist();
 
 --Ottavo Trigger in rimozione
+--(DA CONTROLLARE)
 CREATE OR REPLACE TRIGGER Rem_Playlist_Mod
 BEFORE DELETE ON CONTIENE
 FOR EACH ROW
 EXECUTE Rem_Traccia_Playlist;
 
 --Ultimo Trigger Crea una playlist default per l'Utente
-
+--(DA CONTROLLARE)
 CREATE OR REPLACE TRIGGER Like_Play
 AFTER INSERT ON UTENTE
 
 INSERT INTO Playlist(Titolo,Durata,Ntracce,Visibilita,NickName)
 VALUES ('Liked',DEFAULT,DEFAULT,DEFAULT,NEW.NickName);
-
-
-
-
-
-
-
-
