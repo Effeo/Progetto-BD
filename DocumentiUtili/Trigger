@@ -1,2 +1,0 @@
-Create or replace Trigger AscoltiNoPremium After Insert on Ascolta
-Execute procedure UtentePremium(CodT, NickName);
