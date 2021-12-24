@@ -23,3 +23,10 @@ BEGIN
 	Return null;
 END;
 $AscoltiNoPremium$ Language plpgsql;
+
+
+--TRIGGER
+--Trigger per il primo vincolo
+Create or replace Trigger AscoltiNoPremium After Insert on Ascolta
+FOR EACH ROW
+Execute procedure UtentePremium(CodT, NickName);
