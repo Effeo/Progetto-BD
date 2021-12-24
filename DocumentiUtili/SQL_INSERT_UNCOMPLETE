@@ -64,6 +64,9 @@ VALUES ('Artisti Vari','Non mi pagano abbastanza per continuare',DEFAULT);
 
 -- Creiamo ora gli album degli Artisti creati--
 
+INSERT INTO ALBUM (CodA, Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
+VALUES(0,'Fittizio',2008,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
+
 INSERT INTO ALBUM (Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
 VALUES('Viva la vida or Death and all his friends',2008,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
@@ -97,6 +100,10 @@ VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
 
 --Finiti gli Album Creiamo le Tracce--
+
+INSERT INTO TRACCIA(CodT,Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
+VALUES(0, 'Fittizio','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte',DEFAULT,'MP3',DEFAULT,128,0);
+
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
 VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','MP3',DEFAULT,128,1);
