@@ -78,15 +78,15 @@ CREATE OR REPLACE FUNCTION Rem_Traccia_Album() RETURNS TRIGGER AS $Rem_Album$
 BEGIN
 	UPDATE ALBUM
 	SET Ntracce=Ntracce-1,
-	    Durata=Durata - (SELECT Durata
+	    Durata=(SELECT SUM(Durata)
 			     FROM TRACCIA AS T
-			     WHERE T.CodT=NEW.CodT),  -- Controlliamo la cosa del delete se NEW va bene (credo basti usare il BEFORE)
+			     WHERE T.CodA = OLD.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=NEW.CodA)
-	WHERE CodA=NEW.CodA;
-	RETURN XXX;
-END;$Rem_Album$
+		  WHERE T.CodA=OLD.CodA)
+	WHERE CodA=OLD.CodA;
+	RETURN NULL;
+END;$Rem_Album$ LANGUAGE PLPGSQL
 
 --Passiamo alle Playlist (prima in aggiunta)
 --(CORRETTA)
@@ -100,7 +100,7 @@ BEGIN
 	    
 	WHERE CodP=NEW.CodP; 
 	RETURN NULL;
-END;$Agg_Playlist$LANGUAGE PLPGSQL
+END;$Agg_Playlist$ LANGUAGE PLPGSQL
 
 --Infine la rimozione
 --(DA CONTROLLARE)
@@ -115,6 +115,14 @@ BEGIN
 	WHERE CodP=NEW.CodP;
 	RETURN XXX; 
 END;$Rem_Playlist$
+
+--Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
+CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
+BEGIN 
+	insert into Playlist(Titolo, NickName)
+	values('Brani preferiti', New.NickName);
+	RETURN NULL;
+END; $Def_Playlist$ LANGUAGE PLPGSQL
 
 -- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
 
@@ -176,9 +184,8 @@ FOR EACH ROW
 EXECUTE Rem_Traccia_Playlist;
 
 --Ultimo Trigger Crea una playlist default per l'Utente
---(DA CONTROLLARE)
-CREATE OR REPLACE TRIGGER Like_Play
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Def_Playlist
 AFTER INSERT ON UTENTE
-
-INSERT INTO Playlist(Titolo,Durata,Ntracce,Visibilita,NickName)
-VALUES ('Liked',DEFAULT,DEFAULT,DEFAULT,NEW.NickName);
+FOR EACH ROW
+EXECUTE PROCEDURE Playlist_Default();
