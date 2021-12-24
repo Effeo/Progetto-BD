@@ -99,302 +99,302 @@ VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 --Finiti gli Album Creiamo le Tracce--
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,0,0,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','MP3',DEFAULT,128,1);
+VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,0,0,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','WAV',DEFAULT,256,1);
+VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,0,1,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','FLAC',DEFAULT,512,1);
+VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,TRUE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','FLAC',DEFAULT,512,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,0,0,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','MP3',DEFAULT,128,1);
+VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,FALSE,FALSE,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','MP3',DEFAULT,128,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,0,0,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','WAV',DEFAULT,256,1);
+VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,FALSE,FALSE,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,0,1,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','FLAC',DEFAULT,512,1);
+VALUES('Cemeteries of London','00:03:21',DEFAULT,2008,FALSE,TRUE,'Sbang','https://open.spotify.com/track/7vIY0IXV5FDefLv3RZUq7Q?si=cf766f8b367042e2','FLAC',DEFAULT,512,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lost!','00:03:56',DEFAULT,2008,0,0,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','MP3',DEFAULT,128,1);
+VALUES('Lost!','00:03:56',DEFAULT,2008,FALSE,FALSE,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','MP3',DEFAULT,128,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lost!','00:03:56',DEFAULT,2008,0,0,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','WAV',DEFAULT,256,1);
+VALUES('Lost!','00:03:56',DEFAULT,2008,FALSE,FALSE,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','WAV',DEFAULT,256,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lost!','00:03:56',DEFAULT,2008,0,1,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','FLAC',DEFAULT,512,1);
+VALUES('Lost!','00:03:56',DEFAULT,2008,FALSE,TRUE,'Gang','https://open.spotify.com/track/1PdWRsAEovbR8JlpjqqRxm?si=8caf2d8b359d46d8','FLAC',DEFAULT,512,1);
 
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('42','00:03:56',DEFAULT,2008,0,0,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','MP3',DEFAULT,128,1);
+VALUES('42','00:03:56',DEFAULT,2008,FALSE,FALSE,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('42','00:03:56',DEFAULT,2008,0,0,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','WAV',DEFAULT,256,1);
+VALUES('42','00:03:56',DEFAULT,2008,FALSE,FALSE,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('42','00:03:56',DEFAULT,2008,0,1,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','FLAC',DEFAULT,512,1);
+VALUES('42','00:03:56',DEFAULT,2008,FALSE,TRUE,'Punk','https://open.spotify.com/track/3IL3zHHAFzqu9JkGzMVqsE?si=aa0849e1281944d4','FLAC',DEFAULT,512,1);
 
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,0,0,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','MP3',DEFAULT,128,1);
+VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,0,0,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','WAV',DEFAULT,256,1);
+VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,0,1,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','FLAC',DEFAULT,512,1);
+VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','FLAC',DEFAULT,512,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Yes','00:07:06',DEFAULT,2008,0,0,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,128,1);
+VALUES('Yes','00:07:06',DEFAULT,2008,FALSE,FALSE,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Yes','00:07:06',DEFAULT,2008,0,0,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,256,1);
+VALUES('Yes','00:07:06',DEFAULT,2008,FALSE,FALSE,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Yes','00:07:06',DEFAULT,2008,0,1,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,512,1);
+VALUES('Yes','00:07:06',DEFAULT,2008,FALSE,TRUE,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','MP3',DEFAULT,512,1);
 
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Viva La Vida','00:04:02',DEFAULT,2008,0,0,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','MP3',DEFAULT,128,1);
+VALUES('Viva La Vida','00:04:02',DEFAULT,2008,FALSE,FALSE,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','MP3',DEFAULT,128,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Viva La Vida','00:04:02',DEFAULT,2008,0,0,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','WAV',DEFAULT,256,1);
+VALUES('Viva La Vida','00:04:02',DEFAULT,2008,FALSE,FALSE,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','WAV',DEFAULT,256,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Viva La Vida','00:04:02',DEFAULT,2008,0,1,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,1);
+VALUES('Viva La Vida','00:04:02',DEFAULT,2008,FALSE,TRUE,'Bamb','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,0,0,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','MP3',DEFAULT,128,1);
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,0,0,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','WAV',DEFAULT,256,1);
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,0,1,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','FLAC',DEFAULT,512,1);
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,TRUE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','FLAC',DEFAULT,512,1);
 
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Strawberry Swing','00:04:09',2008,0,0,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,128,1);
+VALUES('Strawberry Swing','00:04:09',2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Strawberry Swing','00:04:09',2008,0,0,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,256,1);
+VALUES('Strawberry Swing','00:04:09',2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Strawberry Swing','00:04:09',2008,0,1,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,512,1);
+VALUES('Strawberry Swing','00:04:09',2008,FALSE,TRUE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,512,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Death and Hills','00:06:18',DEFAULT,2008,0,0,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','MP3',DEFAULT,128,1);
+VALUES('Death and Hills','00:06:18',DEFAULT,2008,FALSE,FALSE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Death and Hills','00:06:18',DEFAULT,2008,0,0,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','WAV',DEFAULT,256,1);
+VALUES('Death and Hills','00:06:18',DEFAULT,2008,FALSE,FALSE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Death and Hills','00:06:18',DEFAULT,2008,0,1,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','MP3',DEFAULT,516,1);
+VALUES('Death and Hills','00:06:18',DEFAULT,2008,FALSE,TRUE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','MP3',DEFAULT,516,1);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('We Are the World','00:07:07',DEFAULT,1985,0,0,'Pop','https://open.spotify.com/track/3Z2tPWiNiIpg8UMMoowHIk?si=a35cf24db54f4fad','MP3',DEFAULT,128,2);
+VALUES('We Are the World','00:07:07',DEFAULT,1985,FALSE,FALSE,'Pop','https://open.spotify.com/track/3Z2tPWiNiIpg8UMMoowHIk?si=a35cf24db54f4fad','MP3',DEFAULT,128,2);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Gotta go home','00:03:45',DEFAULT,1979,0,0,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','MP3',DEFAULT,128,3);
+VALUES('Gotta go home','00:03:45',DEFAULT,1979,FALSE,FALSE,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','MP3',DEFAULT,128,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Gotta go home','00:03:45',DEFAULT,1979,0,0,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','WAV',DEFAULT,256,3);
+VALUES('Gotta go home','00:03:45',DEFAULT,1979,FALSE,FALSE,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','WAV',DEFAULT,256,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Gotta go home','00:03:45',DEFAULT,1979,0,1,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','FLAC',DEFAULT,512,3);
+VALUES('Gotta go home','00:03:45',DEFAULT,1979,FALSE,TRUE,'Funk','https://open.spotify.com/track/4MvGHDenL4t9JW1RHB4rK2?si=3412cf0a657e4ae2','FLAC',DEFAULT,512,3);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Ma baker','00:04:36',DEFAULT,1977,0,0,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','MP3',DEFAULT,128,3);
+VALUES('Ma baker','00:04:36',DEFAULT,1977,FALSE,FALSE,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','MP3',DEFAULT,128,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Ma baker','00:04:36',DEFAULT,1977,0,0,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','WAV',DEFAULT,256,3);
+VALUES('Ma baker','00:04:36',DEFAULT,1977,FALSE,FALSE,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','WAV',DEFAULT,256,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Ma baker','00:04:36',DEFAULT,1977,0,1,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','FLAC',DEFAULT,512,3);
+VALUES('Ma baker','00:04:36',DEFAULT,1977,FALSE,TRUE,'Funk','https://open.spotify.com/track/1BqnZOkYJbvYLOhN0qPJDm?si=714357878d6f4d77','FLAC',DEFAULT,512,3);
 
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Daddy Cool','00:03:28',DEFAULT,1976,0,0,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','MP3',DEFAULT,128,3);
+VALUES('Daddy Cool','00:03:28',DEFAULT,1976,FALSE,FALSE,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','MP3',DEFAULT,128,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Daddy Cool','00:03:28',DEFAULT,1976,0,0,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','WAV',DEFAULT,256,3);
+VALUES('Daddy Cool','00:03:28',DEFAULT,1976,FALSE,FALSE,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','WAV',DEFAULT,256,3);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Daddy Cool','00:03:28',DEFAULT,1976,0,1,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','MP3',DEFAULT,512,3);
+VALUES('Daddy Cool','00:03:28',DEFAULT,1976,FALSE,TRUE,'Funk','https://open.spotify.com/track/3WMbD1OyfKuwWDWMNbPQ4g?si=c71ff2b628dc4cf7','MP3',DEFAULT,512,3);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Curnutone','00:04:12',DEFAULT,1981,0,0,'Folk-Nap','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,4);
+VALUES('Curnutone','00:04:12',DEFAULT,1981,FALSE,TRUE,'Folk-Nap','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,4);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('O teimp s ne va','00:03:45',DEFAULT,1981,0,0,'Folk-Nap','https://open.spotify.com/track/5YPXVzvnHSsVQptzOzL1E7?si=2aaecb06bde1415f','MP3',DEFAULT,128,4);
+VALUES('O teimp s ne va','00:03:45',DEFAULT,1981,FALSE,TRUE,'Folk-Nap','https://open.spotify.com/track/5YPXVzvnHSsVQptzOzL1E7?si=2aaecb06bde1415f','MP3',DEFAULT,128,4);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('O riccutar Nnamurato','00:03:04',DEFAULT,1981,0,0,'Folk-Nap','https://open.spotify.com/track/6AZELCmg1RWmRmfOEkqyFj?si=08c21217a8864a25','MP3',DEFAULT,128,4);
+VALUES('O riccutar Nnamurato','00:03:04',DEFAULT,1981,FALSE,TRUE,'Folk-Nap','https://open.spotify.com/track/6AZELCmg1RWmRmfOEkqyFj?si=08c21217a8864a25','MP3',DEFAULT,128,4);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Something About Us','00:03:52',DEFAULT,2001,0,0,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','MP3',DEFAULT,128,5);
+VALUES('Something About Us','00:03:52',DEFAULT,2001,FALSE,FALSE,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','MP3',DEFAULT,128,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Something About Us','00:03:52',DEFAULT,2001,0,0,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','WAV',DEFAULT,256,5);
+VALUES('Something About Us','00:03:52',DEFAULT,2001,FALSE,FALSE,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','WAV',DEFAULT,256,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Something About Us','00:03:52',DEFAULT,2001,0,1,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','FLAC',DEFAULT,512,5);
+VALUES('Something About Us','00:03:52',DEFAULT,2001,FALSE,TRUE,'Elettronica','https://open.spotify.com/track/1NeLwFETswx8Fzxl2AFl91?si=49426af88d574c6b','FLAC',DEFAULT,512,5);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,0,0,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','MP3',DEFAULT,128,5);
+VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,FALSE,FALSE,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','MP3',DEFAULT,128,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,0,0,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','WAV',DEFAULT,256,5);
+VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,FALSE,FALSE,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','WAV',DEFAULT,256,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,0,1,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','FLAC',DEFAULT,512,5);
+VALUES('Giorrgio by Moroder','00:09:04',DEFAULT,2001,FALSE,TRUE,'Elettronica','https://open.spotify.com/track/0oks4FnzhNp5QPTZtoet7c?si=3d577136eb7944a9','FLAC',DEFAULT,512,5);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,0,0,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','MP3',DEFAULT,128,5);
+VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,FALSE,FALSE,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','MP3',DEFAULT,128,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,0,0,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,5);
+VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,FALSE,FALSE,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,5);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,0,1,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','MP3',DEFAULT,512,5);
+VALUES('Loose your self to dance','00:05:53',DEFAULT,2001,FALSE,TRUE,'Elettronica Funk','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','MP3',DEFAULT,512,5);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Sudno','00:02:21',DEFAULT,2018,0,0,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','MP3',DEFAULT,128,6);
+VALUES('Sudno','00:02:21',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','MP3',DEFAULT,128,6);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Sudno','00:02:21',DEFAULT,2018,0,0,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','WAV',DEFAULT,256,6);
+VALUES('Sudno','00:02:21',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','WAV',DEFAULT,256,6);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Sudno','00:02:21',DEFAULT,2018,0,1,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','FLAC',DEFAULT,512,6);
+VALUES('Sudno','00:02:21',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/1SHB1hp6267UK9bJQUxYvO?si=4ea5dfdc865b4531','FLAC',DEFAULT,512,6);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Tanzevat','00:03:22',DEFAULT,2018,0,0,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,6);
+VALUES('Tanzevat','00:03:22',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,6);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Tanzevat','00:03:22',DEFAULT,2018,0,0,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','WAV',DEFAULT,256,6);
+VALUES('Tanzevat','00:03:22',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','WAV',DEFAULT,256,6);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Tanzevat','00:03:22',DEFAULT,2018,0,1,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','FLAC',DEFAULT,512,6);
+VALUES('Tanzevat','00:03:22',DEFAULT,2018,FALSE,TRUE,'Russian Post-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','FLAC',DEFAULT,512,6);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Sky and Sand','00:03:50',DEFAULT,2013,0,0,'Tech House','https://open.spotify.com/track/4IsHMzDbRE8q5Z4ALsQj3o?si=25b8b9fe5ae24350','MP3',DEFAULT,128,7);
+VALUES('Sky and Sand','00:03:50',DEFAULT,2013,FALSE,TRUE,'Tech House','https://open.spotify.com/track/4IsHMzDbRE8q5Z4ALsQj3o?si=25b8b9fe5ae24350','MP3',DEFAULT,128,7);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Revolte','00:02:39',DEFAULT,2013,0,0,'Tech House','https://open.spotify.com/track/439ZObTQ35Py7TMGNUJmlp?si=d7c48a1fa15f4b9d','MP3',DEFAULT,128,7);
+VALUES('Revolte','00:02:39',DEFAULT,2013,FALSE,TRUE,'Tech House','https://open.spotify.com/track/439ZObTQ35Py7TMGNUJmlp?si=d7c48a1fa15f4b9d','MP3',DEFAULT,128,7);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Train','00:02:48',DEFAULT,2013,0,0,'Tech House','https://open.spotify.com/track/0Tcm3XyhznXJOUoSVlNX7M?si=5aa08fc0349a4f9e','MP3,DEFAULT,128,7);
+VALUES('Train','00:02:48',DEFAULT,2013,FALSE,TRUE,'Tech House','https://open.spotify.com/track/0Tcm3XyhznXJOUoSVlNX7M?si=5aa08fc0349a4f9e','MP3,DEFAULT,128,7);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Monsters Inc','00:02:06',DEFAULT,2001,0,0,'Cartoon','https://open.spotify.com/track/5e0O7MjhNHq9G67qDFM8nR?si=e9748639b7c34b45','MP3',DEFAULT,128,8);
+VALUES('Monsters Inc','00:02:06',DEFAULT,2001,FALSE,TRUE,'Cartoon','https://open.spotify.com/track/5e0O7MjhNHq9G67qDFM8nR?si=e9748639b7c34b45','MP3',DEFAULT,128,8);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Le Festin','00:02:50',DEFAULT,2007,0,0,'Cartoon','https://open.spotify.com/track/02JIdsrod3BYucThfUFDUX?si=6b4c171e94754988','MP3',DEFAULT,128,8);
+VALUES('Le Festin','00:02:50',DEFAULT,2007,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/02JIdsrod3BYucThfUFDUX?si=6b4c171e94754988','MP3',DEFAULT,128,8);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('I cavalieri dello Zodiaco','00:02:45',DEFAULT,2009,0,0,'Cartoon','https://open.spotify.com/track/05A9bpJIvKqts4uswSjNla?si=09964b1ed424438c','MP3',DEFAULT,128,9);
+VALUES('I cavalieri dello Zodiaco','00:02:45',DEFAULT,2009,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/05A9bpJIvKqts4uswSjNla?si=09964b1ed424438c','MP3',DEFAULT,128,9);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Siamo fatti cosi','00:02:50',DEFAULT,2019,0,0,'Cartoon','https://open.spotify.com/track/5pVq1yo6FbpGP20wO6DPIp?si=93fefb2c0abf4e85','MP3',DEFAULT,128,9);
+VALUES('Siamo fatti cosi','00:02:50',DEFAULT,2019,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/5pVq1yo6FbpGP20wO6DPIp?si=93fefb2c0abf4e85','MP3',DEFAULT,128,9);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Pokemon','00:03:20',DEFAULT,2014,0,0,'Cartoon','https://open.spotify.com/track/3S7Q5OqgcPyEXQgyrHbvze?si=da1b827e8fba459a','MP3',DEFAULT,128,9);
+VALUES('Pokemon','00:03:20',DEFAULT,2014,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/3S7Q5OqgcPyEXQgyrHbvze?si=da1b827e8fba459a','MP3',DEFAULT,128,9);
 
 -- Popolati gli album, creiamo alcune tracce senza album (ed alcune Cover)
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Easter egg','00:01:42',DEFAULT,2021,0,0,'Arte','https://open.spotify.com/track/1dwTG4PVhiWzeu0fUfMMMb?si=8e6406c15b2d42d0','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Easter egg','00:01:42',DEFAULT,2021,FALSE,FALSE,'Arte','https://open.spotify.com/track/1dwTG4PVhiWzeu0fUfMMMb?si=8e6406c15b2d42d0','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Easter egg2','00:03:51',DEFAULT,2021,0,0,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Easter egg2','00:03:51',DEFAULT,2021,FALSE,FALSE,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Napoli','00:03:20',DEFAULT,1998,0,0,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Napoli','00:03:20',DEFAULT,1998,FALSE,FALSE,'Sport','https://www.youtube.com/watch?v=aR5BsvCA21s','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Procida','00:04:34',DEFAULT,2019,0,0,'Blues','https://www.youtube.com/watch?v=4CmXDBm6gZA','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Procida','00:04:34',DEFAULT,2019,FALSE,FALSE,'Blues','https://www.youtube.com/watch?v=4CmXDBm6gZA','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Demons','00:02:57',DEFAULT,2012,0,0,'BOH','https://open.spotify.com/track/5qaEfEh1AtSdrdrByCP7qR?si=a4e9be06da044402','MP3',DEFAULT,128,DEFAULT);
+VALUES('Demons','00:02:57',DEFAULT,2012,FALSE,FALSE,'BOH','https://open.spotify.com/track/5qaEfEh1AtSdrdrByCP7qR?si=a4e9be06da044402','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Flyday','00:03:25',DEFAULT,2021,0,1,'Jap80','https://open.spotify.com/track/5N6lcz1UZJVaX2gFjREz5c?si=2466b2f95a834b13','MP3',DEFAULT,128,DEFAULT);
+VALUES('Flyday','00:03:25',DEFAULT,2021,FALSE,TRUE,'Jap80','https://open.spotify.com/track/5N6lcz1UZJVaX2gFjREz5c?si=2466b2f95a834b13','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('U me and madonna','00:04:10',DEFAULT,2017,0,0,'House','https://open.spotify.com/track/1tpTQDEv7I3rpT0W816meN?si=4e34ff5cd0d24f01','MP3',DEFAULT,128,DEFAULT);
+VALUES('U me and madonna','00:04:10',DEFAULT,2017,FALSE,FALSE,'House','https://open.spotify.com/track/1tpTQDEv7I3rpT0W816meN?si=4e34ff5cd0d24f01','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Ecole','00:06:24',DEFAULT,2020,0,1,'House','https://open.spotify.com/track/6ZcN26OG9FY2inZxJwTX6g?si=3d1473829c5941e0','MP3',DEFAULT,256,DEFAULT);
+VALUES('Ecole','00:06:24',DEFAULT,2020,FALSE,TRUE,'House','https://open.spotify.com/track/6ZcN26OG9FY2inZxJwTX6g?si=3d1473829c5941e0','MP3',DEFAULT,256,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Focacine','00:02:20',DEFAULT,2016,0,0,'Trap','https://open.spotify.com/track/7rYlGT75z1srGu5i8wuTwF?si=f230ed80f3ae442b','MP3',DEFAULT,128,DEFAULT);
+VALUES('Focacine','00:02:20',DEFAULT,2016,FALSE,FALSE,'Trap','https://open.spotify.com/track/7rYlGT75z1srGu5i8wuTwF?si=f230ed80f3ae442b','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Dan Dan','00:03:30',DEFAULT,1995,0,0,'Cartoon','https://open.spotify.com/track/6vjNTrHMJuoktlhC7PFAJY?si=c6bbe8a6978446c0','MP3',DEFAULT,128,DEFAULT);
+VALUES('Dan Dan','00:03:30',DEFAULT,1995,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/6vjNTrHMJuoktlhC7PFAJY?si=c6bbe8a6978446c0','MP3',DEFAULT,128,DEFAULT);
 
 -- Passiamo alle tracce dei Maneskin...ops le cover--
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Tanzevat','00:03:22',DEFAULT,2023,1,0,'American After-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,DEFAULT);
+VALUES('Tanzevat','00:03:22',DEFAULT,2023,TRUE,FALSE,'American After-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Loose your self to dance','00:05:53',DEFAULT,2023,1,0,'Neomelodico','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,DEFAULT);
+VALUES('Loose your self to dance','00:05:53',DEFAULT,2023,TRUE,FALSE,'Neomelodico','https://open.spotify.com/track/5CMjjywI0eZMixPeqNd75R?si=9c6255337e62447e','WAV',DEFAULT,256,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Curnutone','00:04:12',DEFAULT,2023,1,0,'Meeelano','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,DEFAULT);
+VALUES('Curnutone','00:04:12',DEFAULT,2023,TRUE,FALSE,'Meeelano','https://open.spotify.com/track/5FK9QdVXh9kcxsyj6bMABU?si=847cf1ef6efb4f20','MP3',DEFAULT,128,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Viva La Vida','00:04:02',DEFAULT,2023,1,1,'Classica','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,DEFAULT);
+VALUES('Viva La Vida','00:04:02',DEFAULT,2023,TRUE,FALSE,'Classica','https://open.spotify.com/track/3Fcfwhm8oRrBvBZ8KGhtea?si=8f157cfb46b2437c','FLAC',DEFAULT,512,DEFAULT);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Begin','00:03:31',DEFAULT,2020,1,1,'Rock','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','FLAC',DEFAULT,512,10);
+VALUES('Begin','00:03:31',DEFAULT,2020,TRUE,TRUE,'Rock','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','FLAC',DEFAULT,512,10);
 
 --Aggiunte dopo--
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto_medio,Qualita,CodA)
-VALUES('Holly e benji','00:03:04',DEFAULT,2020,1,1,'Cartoon','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','WAV',DEFAULT,512,DEFAULT);
+VALUES('Holly e benji','00:03:04',DEFAULT,2020,TRUE,TRUE,'Cartoon','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','WAV',DEFAULT,512,DEFAULT);
 
 
 -- Inseriamo ora gli Utenti -- 
 
-INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Rami', 'MaleK', 'Rami_Malek','silvio.barra@unina.it','I@mMrR0bot',1991/01/01,'Uomo',DEFAULT,'Google is the way',1,1);
+INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
+Values('Rami', 'MaleK', 'Rami_Malek','silvio.barra@unina.it','I@mMrR0bot','1991-01-01','Uomo',DEFAULT,'Google is the way',TRUE,TRUE);
 
-INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Porfirio', 'Tramontana','King_of_Procida','porfirio.tramontata@unina.it','ForzaNapoli',1990/01/01,'Uomo',DEFAULT,'Facciamo pausa dai',1,1);
+INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
+Values('Porfirio', 'Tramontana','King_of_Procida','porfirio.tramontata@unina.it','ForzaNapoli','1990-01-01','Uomo',DEFAULT,'Facciamo pausa dai',TRUE,TRUE);
 
-INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Alfredo', 'Laino', 'Lord_Pino','al.laino@studenti.unina.it','1q2w3e4r5t',1995/08/21,'Lampadina',DEFAULT,'Che bello popolare le basi di dati...Quanto mi rilassa...',1,0);
+INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
+Values('Alfredo', 'Laino', 'Lord_Pino','al.laino@studenti.unina.it','1q2w3e4r5t','1995-08-21','Lampadina',DEFAULT,'Che bello popolare le basi di dati...Quanto mi rilassa...',TRUE,FALSE);
 
-INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Francesco', 'Orlando', 'Effeo','francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002/01/20','Unicorno',DEFAULT,'Sono il terzo Francesco Orlando di UNINA,tutto apposto...',1,0);
+INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
+Values('Francesco', 'Orlando', 'Effeo','francesco.orlando3@studenti.unina.it','y6t5r4e3w2q1','2002-01-20','Unicorno',DEFAULT,'Sono il terzo Francesco Orlando di UNINA,tutto apposto...',TRUE,FALSE);
 
-INSERT INTO UTENTE(Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
-Values('Marco', 'Pastore', 'ElPator', 'loso@ahokok.com','Miscusi',2002/01/01,'Donna',DEFAULT,'Mi scusi Posso fare una Domanda',0,0); --Cute--
+INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
+Values('Marco', 'Pastore', 'ElPator', 'loso@ahokok.com','Miscusi','2002-01-01','Donna',DEFAULT,'Mi scusi Posso fare una Domanda',FALSE,FALSE); --Cute--
 
 -- Associamo agli album gli artisti --
 
