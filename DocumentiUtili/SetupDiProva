@@ -1,5 +1,3 @@
-CREATE DB PINOFY;
-
 CREATE TABLE ALBUM (
 	CodA SERIAL,
 	Titolo VARCHAR(50) NOT NULL,
@@ -180,11 +178,11 @@ BEGIN
 	UPDATE ALBUM
 	SET Voto=(SELECT AVG(T.Voto)
 		  FROM TRACCIA as T
-		  WHERE T.codA=NEW.codA and T.Voto T.Voto > 0
+		  WHERE T.codA=NEW.codA and T.Voto > 0
 		  GROUP BY T.CodT )
 	WHERE CodA=NEW.CodA;
 	RETURN Null;
-END; $Voto_Album$ LANGUAGE PLPGSQL
+END; $Voto_Album$ LANGUAGE PLPGSQL;
 
 --Passiamo ora alle modifiche relative agli artisti
 --(CORRETTA MA NON PER PIU' ARTISTI)
@@ -201,7 +199,7 @@ BEGIN
 			   FROM PRODUCE AS P2
 			   WHERE P2.CodT=NEW.CodT);
 	RETURN NULL;
-END;$Voto_Artista$ LANGUAGE PLPGSQL
+END;$Voto_Artista$ LANGUAGE PLPGSQL;
 
 --In conlusione andiamo a modificare i valori di media ntracce e durate per Album quando si aggiunge una traccia al Album
 --(CORRETTA)
@@ -214,10 +212,10 @@ BEGIN
 			     WHERE T.CodA=NEW.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=NEW.CodA T.Voto > 0)
+		  WHERE T.CodA=NEW.CodA AND T.Voto > 0)
 	WHERE CodA=NEW.CodA;
 	RETURN NULL;
-END;$Agg_Album$ LANGUAGE PLPGSQL
+END;$Agg_Album$ LANGUAGE PLPGSQL;
 
 -- Facciamo lo stesso in fase di rimozione di una Traccia da un Album
 --(CORRETTA)
@@ -229,11 +227,11 @@ BEGIN
 			     FROM TRACCIA AS T
 			     WHERE T.CodA = OLD.CodA),
 	    Voto=(SELECT AVG(T.Voto)
-		  FROM  TRACCIA AS T
-		  WHERE T.CodA=OLD.CodA T.Voto > 0)
+			  FROM  TRACCIA AS T
+		      WHERE T.CodA=OLD.CodA AND T.Voto > 0)
 	WHERE CodA=OLD.CodA;
 	RETURN NULL;
-END;$Rem_Album$ LANGUAGE PLPGSQL
+END;$Rem_Album$ LANGUAGE PLPGSQL;
 
 --Passiamo alle Playlist (prima in aggiunta)
 --(CORRETTA)
@@ -247,7 +245,7 @@ BEGIN
 	    
 	WHERE CodP=NEW.CodP; 
 	RETURN NULL;
-END;$Agg_Playlist$ LANGUAGE PLPGSQL
+END;$Agg_Playlist$ LANGUAGE PLPGSQL;
 
 --Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
 CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
@@ -255,7 +253,7 @@ BEGIN
 	insert into Playlist(Titolo, NickName)
 	values('Brani preferiti', New.NickName);
 	RETURN NULL;
-END; $Def_Playlist$ LANGUAGE PLPGSQL
+END; $Def_Playlist$ LANGUAGE PLPGSQL;
 
 -- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
 
@@ -337,4 +335,5 @@ INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',1);
 
 insert into Vota
-values('RamiMalek', 1, 10)
+values('Rami_Malek', 1, 10);  
+	   
