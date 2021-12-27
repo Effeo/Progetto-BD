@@ -33,7 +33,7 @@ BEGIN
 	UPDATE ALBUM
 	SET Voto=(SELECT AVG(T.Voto)
 		  FROM TRACCIA as T
-		  WHERE T.codA=NEW.codA
+		  WHERE T.codA=NEW.codA and T.Voto T.Voto > 0
 		  GROUP BY T.CodT )
 	WHERE CodA=NEW.CodA;
 	RETURN Null;
@@ -67,7 +67,7 @@ BEGIN
 			     WHERE T.CodA=NEW.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=NEW.CodA)
+		  WHERE T.CodA=NEW.CodA T.Voto > 0)
 	WHERE CodA=NEW.CodA;
 	RETURN NULL;
 END;$Agg_Album$ LANGUAGE PLPGSQL
@@ -83,7 +83,7 @@ BEGIN
 			     WHERE T.CodA = OLD.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=OLD.CodA)
+		  WHERE T.CodA=OLD.CodA T.Voto > 0)
 	WHERE CodA=OLD.CodA;
 	RETURN NULL;
 END;$Rem_Album$ LANGUAGE PLPGSQL
@@ -163,9 +163,9 @@ FOR EACH ROW
 EXECUTE PROCEDURE Agg_Traccia_Album();
 
 --Sesto Trigger si attiva quando rimuoviamo una traccia in un Album
---(DA CONTROLLARE)
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Rem_Album_Mod
-BEFORE DELETE ON TRACCIA --Album chaive esterna
+AFTER DELETE ON TRACCIA --Album chaive esterna
 FOR EACH ROW
 EXECUTE PROCEDURE Rem_Traccia_Album();
 
