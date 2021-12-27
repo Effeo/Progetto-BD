@@ -255,6 +255,20 @@ BEGIN
 	RETURN NULL;
 END; $Def_Playlist$ LANGUAGE PLPGSQL;
 
+--Infine la rimozione
+--(CORRETTA)
+CREATE OR REPLACE FUNCTION Rem_Traccia_Playlist() RETURNS TRIGGER AS $Rem_Playlist$
+BEGIN
+	UPDATE Playlist
+	SET NTracce=NTracce-1,
+	    Durata=(SELECT SUM(durata)
+			     FROM CONTIENE AS C, Traccia as T
+			     WHERE C.CodP=OLD.CodP and C.CodT = T.CodT)
+	    
+	WHERE CodP=OLD.CodP;
+	RETURN NULL; 
+END;$Rem_Playlist$ LANGUAGE PLPGSQL;
+
 -- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
 
 --Primo Trigger aggiorna la media di una Traccia
@@ -298,6 +312,13 @@ CREATE OR REPLACE TRIGGER Agg_Playlist_Mod
 AFTER INSERT ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Agg_Traccia_Playlist();
+
+--Ottavo Trigger in rimozione
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Rem_Playlist
+AFTER DELETE ON CONTIENE
+FOR EACH ROW
+EXECUTE PROCEDURE Rem_Traccia_Playlist();
 
 --Ultimo Trigger Crea una playlist default per l'Utente
 --(CORRETTO)
