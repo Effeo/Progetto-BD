@@ -115,6 +115,23 @@ BEGIN
 	RETURN NULL;
 END; $Def_Playlist$ LANGUAGE PLPGSQL
 
+--Funzione che aggiorna i voti di un artista quando una traccia viene eliminata
+--(DA CONTROLLARE)
+CREATE OR REPLACE FUNCTION Edit_Voto_Artista_Del() RETURNS TRIGGER AS $Voto_Artista_Del$
+BEGIN 
+	UPDATE ARTISTA
+	SET Voto=(SELECT AVG(T.Voto)
+		  FROM TRACCIA AS T,PRODUCE AS P
+		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
+							 FROM PRODUCE AS P1
+							 WHERE P1.CodT=OLD.CodT) and T.Voto > 0
+		 GROUP BY T.CodT)
+	WHERE NomeArte IN (SELECT NomeArte
+			   FROM PRODUCE AS P2
+			   WHERE P2.CodT=OLD.CodT);
+	RETURN NULL;
+END;$Voto_Artista_Del$ LANGUAGE PLPGSQL
+
 -- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
 
 --Primo Trigger aggiorna la media di una Traccia
@@ -125,7 +142,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Traccia();
 
 -- Secondo Trigger aggiorna il voto conseguente ad una modifica da parte del utente
---(DA CONREOLLARE)
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Voto_Utente_Mod
 AFTER UPDATE OF Voto on VOTA
 FOR EACH ROW
@@ -172,6 +189,13 @@ CREATE OR REPLACE TRIGGER Rem_Playlist
 AFTER DELETE ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Rem_Traccia_Playlist();
+
+--Trigger per aggiornare il voto di un artista dopo l'eliminazione di una traccia
+(DA CONTROLLARE)
+CREATE OR REPLACE TRIGGER Agg_Voto_Art_Del
+AFTER DELETE ON Traccia
+FOR EACH ROW
+EXECUTE PROCEDURE Edit_Voto_Artista_Del();
 
 --Ultimo Trigger Crea una playlist default per l'Utente
 --(CORRETTO)
