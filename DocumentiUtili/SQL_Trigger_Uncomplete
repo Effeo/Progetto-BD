@@ -73,7 +73,7 @@ BEGIN
 END;$Agg_Album$ LANGUAGE PLPGSQL
 
 -- Facciamo lo stesso in fase di rimozione di una Traccia da un Album
---(DA CONTROLLARE)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Rem_Traccia_Album() RETURNS TRIGGER AS $Rem_Album$
 BEGIN
 	UPDATE ALBUM
