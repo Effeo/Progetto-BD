@@ -33,7 +33,7 @@ BEGIN
 	UPDATE ALBUM
 	SET Voto=(SELECT AVG(T.Voto)
 		  FROM TRACCIA as T
-		  WHERE T.codA=NEW.codA and T.Voto T.Voto > 0
+		  WHERE T.codA=NEW.codA and T.Voto > 0
 		  GROUP BY T.CodT )
 	WHERE CodA=NEW.CodA;
 	RETURN Null;
@@ -48,7 +48,7 @@ BEGIN
 		  FROM TRACCIA AS T,PRODUCE AS P
 		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
 							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=NEW.CodT)
+							 WHERE P1.CodT=NEW.CodT) and T.Voto > 0
 		 GROUP BY T.CodT)
 	WHERE NomeArte IN (SELECT NomeArte
 			   FROM PRODUCE AS P2
@@ -67,7 +67,7 @@ BEGIN
 			     WHERE T.CodA=NEW.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=NEW.CodA T.Voto > 0)
+		  WHERE T.CodA=NEW.CodA and T.Voto > 0)
 	WHERE CodA=NEW.CodA;
 	RETURN NULL;
 END;$Agg_Album$ LANGUAGE PLPGSQL
@@ -83,7 +83,7 @@ BEGIN
 			     WHERE T.CodA = OLD.CodA),
 	    Voto=(SELECT AVG(T.Voto)
 		  FROM  TRACCIA AS T
-		  WHERE T.CodA=OLD.CodA T.Voto > 0)
+		  WHERE T.CodA=OLD.CodA and T.Voto > 0)
 	WHERE CodA=OLD.CodA;
 	RETURN NULL;
 END;$Rem_Album$ LANGUAGE PLPGSQL
