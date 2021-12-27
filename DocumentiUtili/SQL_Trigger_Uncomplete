@@ -2,7 +2,8 @@
 -- E poi dichiareremo i sudetti Trigger
 
 
--- Per prima cosa costruiamo una procedura che si occupa di aggiornare la media del voto di una traccia dopo che e' stata votata
+-- Per prima cosa costruiamo una procedura che si occupa di aggiornare la media del voto di una traccia dopo che e' stata votata o quando è stato modificato
+--un voto
 --(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia() RETURNS TRIGGER AS $Voto_Traccia$
 BEGIN
@@ -14,17 +15,6 @@ BEGIN
 	WHERE CodT=NEW.CodT;
 	RETURN Null;
 END; $Voto_Traccia$ LANGUAGE PLPGSQL;
-
---Qualora l'utente(premium) volesse cambiare la propria opinione sul voto di una (o piu) tracce il voto deve essere modificato (al piu recente)
---(DA CONTROLLARE)
-CREATE OR REPLACE FUNCTION Edit_Voto_Utente() RETURNS TRIGGER AS $Voto_Utente$
-BEGIN
-	UPDATE VOTA
-	SET Voto=NEW.Voto
-	WHERE 	Vota.NickName=NEW.NickName AND Vota.CodT=NEW.CodT;
-	RETURN NULL;
-END; $Voto_Utente$ LANGUAGE PLPGSQL;
--- Ovviamente quando cambia il voto di un utente bisognera richiamare il trigger per cambiare la media dei voti della traccia scritto sopra
 
 --Passiamo ora alle modifiche relative agli album (necessarie dopo le modifiche dei voti delle tracce)
 --(CORRETTA)
@@ -139,8 +129,7 @@ EXECUTE PROCEDURE Edit_Voto_Traccia();
 CREATE OR REPLACE TRIGGER Voto_Utente_Mod
 AFTER UPDATE OF Voto on VOTA
 FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Utente(); 
--- EXECUTE PROCEDURE Edit_Voto_Traccia();si puo fare senza che creo due trigger ?
+EXECUTE PROCEDURE Edit_Voto_Traccia();
 
 --Terzo Trigger modifica il Voto del Album,a fronte della modifica del voto della traccia
 --(CORRETTO)
