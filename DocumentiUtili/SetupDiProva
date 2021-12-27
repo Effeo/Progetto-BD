@@ -193,7 +193,7 @@ BEGIN
 		  FROM TRACCIA AS T,PRODUCE AS P
 		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
 							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=NEW.CodT)
+							 WHERE P1.CodT=NEW.CodT) and T.Voto > 0
 		 GROUP BY T.CodT)
 	WHERE NomeArte IN (SELECT NomeArte
 			   FROM PRODUCE AS P2
