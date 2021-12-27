@@ -103,20 +103,21 @@ BEGIN
 END;$Agg_Playlist$ LANGUAGE PLPGSQL
 
 --Infine la rimozione
---(DA CONTROLLARE)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Rem_Traccia_Playlist() RETURNS TRIGGER AS $Rem_Playlist$
 BEGIN
 	UPDATE Playlist
 	SET NTracce=NTracce-1,
-	    Durata=Durata - (SELECT Durata
-			     FROM TRACCIA AS T
-			     WHERE T.CodT=NEW.CodT)
+	    Durata=(SELECT SUM(durata)
+			     FROM CONTIENE AS C, Traccia as T
+			     WHERE C.CodP=OLD.CodP and C.CodT = T.CodT)
 	    
-	WHERE CodP=NEW.CodP;
-	RETURN XXX; 
-END;$Rem_Playlist$
+	WHERE CodP=OLD.CodP;
+	RETURN NULL; 
+END;$Rem_Playlist$ LANGUAGE PLPGSQL;
 
 --Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
+(CORRETTA)
 CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
 BEGIN 
 	insert into Playlist(Titolo, NickName)
@@ -177,11 +178,11 @@ FOR EACH ROW
 EXECUTE PROCEDURE Agg_Traccia_Playlist();
 
 --Ottavo Trigger in rimozione
---(DA CONTROLLARE)
-CREATE OR REPLACE TRIGGER Rem_Playlist_Mod
-BEFORE DELETE ON CONTIENE
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Rem_Playlist
+AFTER DELETE ON CONTIENE
 FOR EACH ROW
-EXECUTE Rem_Traccia_Playlist;
+EXECUTE PROCEDURE Rem_Traccia_Playlist();
 
 --Ultimo Trigger Crea una playlist default per l'Utente
 --(CORRETTO)
