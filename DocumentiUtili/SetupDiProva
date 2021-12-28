@@ -368,6 +368,84 @@ AFTER INSERT ON UTENTE
 FOR EACH ROW
 EXECUTE PROCEDURE Playlist_Default();
 
+--FUNZIONI PER I VINCOLI
+--primo vincolo: un utente non premium non può ascoltare tracce di qualità maggiore al 128
+Create or replace Function UtentePremium() returns Trigger as $AscoltiNoPremium$
+DECLARE
+	Qualita1 Traccia.Qualita%TYPE;
+	IsPremium1 Utente.IsPremium%TYPE;
+BEGIN
+	Select Qualita into Qualita1
+	From Traccia
+	Where New.CodT = Traccia.CodT;
+	
+	Select IsPremium into IsPremium1
+	From Utente
+	Where New.NickName = Utente.NickName;
+	
+	if(Qualita1 > 128 and not IsPremium1) then
+		Delete From Ascolta Where (Ascolta.CodT = new.CodT and Ascolta.NickName = NEW.NickName);
+	end if;
+	Return null;
+END;$AscoltiNoPremium$ Language plpgsql;
+
+--seconda funzione: i voti devono essere di utenti premium
+Create or replace Function VotoUtentePremium() returns Trigger as $VotiNoPremium$
+DECLARE
+	IsPremium1 Utente.IsPremium%TYPE;
+BEGIN
+	Select IsPremium into IsPremium1
+	From Utente
+	Where New.NickName = Utente.NickName;
+	
+	if(not IsPremium1) then
+		Delete From Vota Where (Vota.CodT = new.CodT and Vota.NickName = NEW.NickName);
+	end if;
+	Return null;
+END;$VotiNoPremium$ Language plpgsql;
+
+--Terzo trigger: se una traccia è cover allora deve avere artista diverso dall'originale
+Create or replace Function TracciaCover() returns Trigger as $TracciaCoverTrigger$
+DECLARE
+	TracciaOr Traccia.CodTC%Type;
+	ArtistaOr Artista.NomeArte%Type;
+BEGIN
+	
+	SELECT Traccia.CodTC into TracciaOr
+	FROM Produce, Traccia
+	Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
+
+	SELECT Artista.NomeArte into ArtistaOr
+	FROM Artista, Produce
+	Where Produce.CodT = TracciaOr and Produce.NomeArte = Artista.NomeArte;
+
+	if (ArtistaOr = new.NomeArte) then
+		delete from Produce where (CodT = New.CodT and NomeArte = new.NomeArte);
+	end if;
+	
+	Return null;
+END;$TracciaCoverTrigger$ Language plpgsql;
+
+--TRIGGER
+--Trigger per il primo vincolo
+Create or replace Trigger AscoltiNoPremium 
+After Insert on Ascolta
+FOR EACH ROW
+Execute procedure UtentePremium();
+
+--Trigger per il secondo vincolo
+Create or replace Trigger AscoltiNoPremium 
+After Insert on Vota
+FOR EACH ROW
+Execute procedure VotoUtentePremium();
+
+--Trigger per il terzo vincolo
+Create or replace Trigger TracciaCoverTrigger 
+After Insert on Produce
+FOR EACH ROW
+Execute procedure TracciaCover();
+
+--INSERT
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('ColdPlay','Si divertono a creare generi, non aiutandoci a fare questo progetto...',DEFAULT);
 
