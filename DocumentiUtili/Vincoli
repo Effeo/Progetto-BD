@@ -16,7 +16,7 @@ Ntracce: default 0
 durata: default 0
 
 
-Traccia:
+Traccia: X
 Titolo: not null X
 Durata: not null X
 AnnoU: not null, X minore uguale anno corrente
@@ -27,10 +27,10 @@ Formato : not null = MP3... default MP3 X
 Qualità : not null 128 o ... default 128 X
 Voto: default 0 X
 Unique(Titolo, AnnoU, CodA) X
-Se la traccia è remastered allora il formato è migliore
-Se è remastered l'anno deve essere maggiore
-Se è cover l'anno deve essere maggiore uguale dell'originale
-Se è cover l'album deve essere diverso.
+Se la traccia è remastered allora il formato è migliore X
+Se è remastered l'anno deve essere maggiore X
+Se è cover l'anno deve essere maggiore uguale dell'originale X
+Se è cover l'album deve essere diverso. X
 
 Album: X
 Titolo : not null 
