@@ -30,7 +30,7 @@ BEGIN
 END; $Voto_Album$ LANGUAGE PLPGSQL
 
 --Passiamo ora alle modifiche relative agli artisti
---(CORRETTA MA NON PER PIU' ARTISTI)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Artista() RETURNS TRIGGER AS $Voto_Artista$
 BEGIN 
 	UPDATE ARTISTA
@@ -156,7 +156,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Album();
 
 --Quarto Trigger modifica il Voto del Artista,a fronte della modifica del voto della traccia
---(CORRETTO PER UN SOLO ARTISTA)
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER Voto_Artista_Mod
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
