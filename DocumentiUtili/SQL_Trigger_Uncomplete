@@ -4,7 +4,7 @@
 
 -- Per prima cosa costruiamo una procedura che si occupa di aggiornare la media del voto di una traccia dopo che e' stata votata o quando è stato modificato
 --un voto
---(CORRETTA)
+--(CORRETTA CI STA DANDO PROBLEMI)
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia() RETURNS TRIGGER AS $Voto_Traccia$
 BEGIN
 	UPDATE TRACCIA
