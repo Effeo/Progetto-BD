@@ -27,7 +27,6 @@ Formato : not null = MP3... default MP3 X
 Qualità : not null 128 o ... default 128 X
 Voto: default 0 X
 Unique(Titolo, AnnoU, CodA) X
-Una cover e una remasterd non possono esistere senza l'originale
 Se la traccia è remastered allora il formato è migliore
 Se è remastered l'anno deve essere maggiore
 Se è cover l'anno deve essere maggiore uguale dell'originale
@@ -50,9 +49,9 @@ Artista:X
 Voto: default 0
 
 Vincoli interrelazionali:
-Un utente non premium non può ascoltare tracce di qualità maggiore a 128. Tra utente ascolta e traccia.
-I voti delle tracce devono essere di utenti premium. Utente e vota.
-Se è cover l'artista deve essere diverso. Artista e traccia. 
+Un utente non premium non può ascoltare tracce di qualità maggiore a 128. Tra utente ascolta e traccia.X
+I voti delle tracce devono essere di utenti premium. Utente e vota.X
+Se è cover l'artista deve essere diverso. Artista e traccia. X
 
 Trigger:
 Quando un utente premium vota una traccia si fa la media dei voti, dell'album e delle tracce e dell'artista. (2 trigger) X
