@@ -56,6 +56,56 @@ BEGIN
 	Return null;
 END;$TracciaCoverTrigger$ Language plpgsql;
 
+--Quarto trigger: il formato della remastered deve essere maggiore di quella originale e l'anno deve essere maggiore dell'originale
+Create or replace Function FormatoAnnoRemastered() returns Trigger as $FormatoAnnoRemasteredTrigger$
+DECLARE
+	FormatoO Traccia.Formato%Type;
+	AnnoO Traccia.AnnoU%Type;
+BEGIN
+	SELECT Traccia.Formato into FormatoO
+	FROM Traccia
+	Where Traccia.CodT = New.CodTR;
+	
+	SELECT Traccia.AnnoU into AnnoO
+	FROM Traccia
+	Where Traccia.CodT = New.CodTR;
+	
+	if(FormatoO = 'MP3' and new.Formato = 'MP3')then
+		delete from Traccia where Codt = new.CodT;
+	elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
+		delete from Traccia where Codt = new.CodT;
+	elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
+		delete from Traccia where Codt = new.CodT;
+	end if;
+	
+	if(New.AnnoU <= AnnoO) then
+		delete from Traccia where Codt = new.CodT;
+	end if;
+	
+	Return null;
+END; $FormatoAnnoRemasteredTrigger$ Language plpgsql;
+
+--Quinto trigger: L'anno della cover deve essere maggiore uguale dell'originale e l'album di apparteneza deve essere diverso
+Create or replace Function AlbumAnnoCover() returns Trigger as $AlbumAnnoCoverTrigger$
+DECLARE
+	CodAO Traccia.CodA%Type;
+	AnnoO Traccia.AnnoU%Type;
+BEGIN
+	SELECT Traccia.CodA into CodAO
+	FROM Traccia
+	Where Traccia.CodT = New.CodTC;
+	
+	SELECT Traccia.AnnoU into AnnoO
+	FROM Traccia
+	Where Traccia.CodT = New.CodTC;
+	
+	if(CodAO = new.CodA or new.AnnoU < AnnoO) then
+		delete from Traccia where Codt = new.CodT;
+	end if;
+	
+	Return null;
+END; $AlbumAnnoCoverTrigger$ Language plpgsql;
+
 --TRIGGER
 --Trigger per il primo vincolo
 Create or replace Trigger AscoltiNoPremium 
@@ -74,3 +124,9 @@ Create or replace Trigger TracciaCoverTrigger
 After Insert on Produce
 FOR EACH ROW
 Execute procedure TracciaCover();
+
+--Trigger per il quinto vincolo
+Create or replace Trigger AlbumAnnoCoverTrigger 
+After Insert on Traccia
+FOR EACH ROW
+Execute procedure AlbumAnnoCover();
