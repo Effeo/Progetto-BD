@@ -114,7 +114,7 @@ FOR EACH ROW
 Execute procedure UtentePremium();
 
 --Trigger per il secondo vincolo
-Create or replace Trigger AscoltiNoPremium 
+Create or replace Trigger VotiNoPremium 
 After Insert on Vota
 FOR EACH ROW
 Execute procedure VotoUtentePremium();
@@ -124,6 +124,12 @@ Create or replace Trigger TracciaCoverTrigger
 After Insert on Produce
 FOR EACH ROW
 Execute procedure TracciaCover();
+
+--Trigger per il quarto vincolo
+Create or replace Trigger FormatoAnnoRemasteredTrigger 
+After Insert on Traccia
+FOR EACH ROW
+Execute procedure FormatoAnnoRemastered();
 
 --Trigger per il quinto vincolo
 Create or replace Trigger AlbumAnnoCoverTrigger 
