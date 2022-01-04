@@ -271,7 +271,7 @@ BEGIN
 END;$Rem_Playlist$ LANGUAGE PLPGSQL;
 
 --Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
-(CORRETTA)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
 BEGIN 
 	insert into Playlist(Titolo, NickName)
@@ -355,7 +355,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE Rem_Traccia_Playlist();
 
 --Trigger per aggiornare il voto di un artista dopo l'eliminazione di una traccia
-(DA CONTROLLARE)
+--(DA CONTROLLARE)
 CREATE OR REPLACE TRIGGER Agg_Voto_Art_Del
 AFTER DELETE ON Traccia
 FOR EACH ROW
