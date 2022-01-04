@@ -409,20 +409,24 @@ Create or replace Function TracciaCover() returns Trigger as $TracciaCoverTrigge
 DECLARE
 	TracciaOr Traccia.CodTC%Type;
 	ArtistaOr Artista.NomeArte%Type;
+	Cover Traccia.IsCover%Type;
 BEGIN
-	
-	SELECT Traccia.CodTC into TracciaOr
-	FROM Produce, Traccia
-	Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
+	SELECT IsCover into Cover
+	FROM Traccia
+	where Traccia.CodT = New.Codt;
+	if(Cover) then
+		SELECT Traccia.CodTC into TracciaOr
+		FROM Produce, Traccia
+		Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
 
-	SELECT Artista.NomeArte into ArtistaOr
-	FROM Artista, Produce
-	Where Produce.CodT = TracciaOr and Produce.NomeArte = Artista.NomeArte;
+		SELECT Artista.NomeArte into ArtistaOr
+		FROM Artista, Produce
+		Where Produce.CodT = TracciaOr and Produce.NomeArte = Artista.NomeArte;
 
-	if (ArtistaOr = new.NomeArte) then
-		delete from Produce where (CodT = New.CodT and NomeArte = new.NomeArte);
+		if (ArtistaOr = new.NomeArte) then
+			delete from Produce where (CodT = New.CodT and NomeArte = new.NomeArte);
+		end if;
 	end if;
-	
 	Return null;
 END;$TracciaCoverTrigger$ Language plpgsql;
 
@@ -432,26 +436,27 @@ DECLARE
 	FormatoO Traccia.Formato%Type;
 	AnnoO Traccia.AnnoU%Type;
 BEGIN
-	SELECT Traccia.Formato into FormatoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTR;
-	
-	SELECT Traccia.AnnoU into AnnoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTR;
-	
-	if(FormatoO = 'MP3' and new.Formato = 'MP3')then
-		delete from Traccia where Codt = new.CodT;
-	elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
-		delete from Traccia where Codt = new.CodT;
-	elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
-		delete from Traccia where Codt = new.CodT;
+	if(New.IsRemastered) then
+		SELECT Traccia.Formato into FormatoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTR;
+
+		SELECT Traccia.AnnoU into AnnoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTR;
+
+		if(FormatoO = 'MP3' and new.Formato = 'MP3')then
+			delete from Traccia where Codt = new.CodT;
+		elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
+			delete from Traccia where Codt = new.CodT;
+		elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
+			delete from Traccia where Codt = new.CodT;
+		end if;
+
+		if(New.AnnoU <= AnnoO) then
+			delete from Traccia where Codt = new.CodT;
+		end if;
 	end if;
-	
-	if(New.AnnoU <= AnnoO) then
-		delete from Traccia where Codt = new.CodT;
-	end if;
-	
 	Return null;
 END; $FormatoAnnoRemasteredTrigger$ Language plpgsql;
 
@@ -461,18 +466,19 @@ DECLARE
 	CodAO Traccia.CodA%Type;
 	AnnoO Traccia.AnnoU%Type;
 BEGIN
-	SELECT Traccia.CodA into CodAO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTC;
-	
-	SELECT Traccia.AnnoU into AnnoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTC;
-	
-	if(CodAO = new.CodA or new.AnnoU < AnnoO) then
-		delete from Traccia where Codt = new.CodT;
+	if(New.IsCover) then
+		SELECT Traccia.CodA into CodAO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTC;
+
+		SELECT Traccia.AnnoU into AnnoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTC;
+
+		if(CodAO = new.CodA or new.AnnoU < AnnoO) then
+			delete from Traccia where Codt = new.CodT;
+		end if;
 	end if;
-	
 	Return null;
 END; $AlbumAnnoCoverTrigger$ Language plpgsql;
 
