@@ -115,15 +115,16 @@ EXECUTE PROCEDURE Ntracce_Durata_Album_INS();
 --(CONTROLLARE)
 CREATE OR REPLACE FUNCTION Voto_Artista_UPD() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_UPD$
 BEGIN 
+	CREATE OR REPLACE VIEW ArtistaVoto as
+	select NomeArte, avg(voto) AS votoMedio
+	from Traccia as T, Produce as P
+	where T.Codt = p.CodT and voto > 0
+	group by Nomearte;
+
 	UPDATE ARTISTA
-	SET Voto=(SELECT AVG(T.Voto)
-		  FROM TRACCIA AS T,PRODUCE AS P
-		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
-							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=NEW.CodT) and T.Voto > 0)
-	WHERE NomeArte IN (SELECT NomeArte
-			   FROM PRODUCE AS P2
-			   WHERE P2.CodT=NEW.CodT);
+	SET Voto = (SELECT votoMedio FROM ArtistaVoto where NomeArte in 
+			   (SELECT NomeArte FROM Produce where CodT = New.CodT))
+	WHERE NomeArte in (SELECT NomeArte FROM Produce where CodT = New.CodT);
 	RETURN NULL;
 END;$TRIGGER_Voto_Artista_UPD$ LANGUAGE PLPGSQL;
 
@@ -158,7 +159,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE Voto_Artista_DEL();
 
 --PROCEDURA 8: Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
-(CORRETTA)
+--(CORRETTA)
 CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
 BEGIN 
 	insert into Playlist(Titolo, NickName)
@@ -180,8 +181,8 @@ BEGIN
 	UPDATE Playlist
 	SET NTracce=NTracce+1,
 	    Durata=(SELECT SUM(Durata)
-			     FROM TRACCIA AS T
-			     WHERE T.Codt=NEW.Codt)
+			     FROM TRACCIA AS T, Contiene As C
+			     WHERE T.Codt=C.CodT and C.CodP = NEW.CodP)
 	    
 	WHERE CodP=NEW.CodP; 
 	RETURN NULL;
