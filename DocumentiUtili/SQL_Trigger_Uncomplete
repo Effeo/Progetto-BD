@@ -1,25 +1,56 @@
---In questo blocco inseriremo prima tutte le procedure che useremo quando attiveremo i Trigger
+--In questo blocco inseriremo prima tutte le funzioni che useremo quando attiveremo i Trigger
 -- E poi dichiareremo i sudetti Trigger
 
-
--- Per prima cosa costruiamo una procedura che si occupa di aggiornare la media del voto di una traccia dopo che e' stata votata o quando è stato modificato
---un voto
--- Quando aggiungiamo un voto per una traccia il cui artista ha già prodotto altre tracce non va
---(CORRETTA CI STA DANDO PROBLEMI)
-CREATE OR REPLACE FUNCTION Edit_Voto_Traccia() RETURNS TRIGGER AS $Voto_Traccia$
+--PROCEDURA 1: All'aggiunta di un voto viene fatta la media in Traccia
+--(CORRETTA)
+CREATE OR REPLACE FUNCTION Edit_Voto_Traccia_INS() RETURNS TRIGGER AS $Voto_Traccia_INS$
 BEGIN
 	UPDATE TRACCIA
 	SET VOTO=(SELECT AVG(V.Voto)
 		  FROM VOTA AS V
 		  WHERE V.CodT=NEW.CodT 
-		  GROUP BY V.CodT)
+		  )
 	WHERE CodT=NEW.CodT;
 	RETURN Null;
-END; $Voto_Traccia$ LANGUAGE PLPGSQL;
+END; $Voto_Traccia_INS$ LANGUAGE PLPGSQL;
 
---Passiamo ora alle modifiche relative agli album (necessarie dopo le modifiche dei voti delle tracce)
+--TRIGGER 1: aggiorna la media di una Traccia all'inserimento di un voto
 --(CORRETTA)
-CREATE OR REPLACE FUNCTION Edit_Voto_Album() RETURNS TRIGGER AS $Voto_Album$
+CREATE OR REPLACE TRIGGER Voto_Traccia_INS
+AFTER INSERT ON VOTA
+FOR EACH ROW
+EXECUTE PROCEDURE Edit_Voto_Traccia_INS();
+
+
+-- TRIGGER 1.2: aggiorna il voto di una traccia dopo la modifica di un voto
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Voto_Traccia_UPD
+AFTER UPDATE OF Voto on VOTA
+FOR EACH ROW
+EXECUTE PROCEDURE Edit_Voto_Traccia_INS();
+
+--PROCEDURA 2: Dopo l'eliminazione di un voto viene aggiornata la media in Traccia
+--(CORRETTA)
+CREATE OR REPLACE FUNCTION Edit_Voto_Traccia_DEL() RETURNS TRIGGER AS $Voto_Traccia_DEL$
+BEGIN
+	UPDATE TRACCIA
+	SET VOTO=(SELECT AVG(V.Voto)
+		  FROM VOTA AS V
+		  WHERE V.CodT=OLD.CodT 
+		  )
+	WHERE CodT=OLD.CodT;
+	RETURN Null;
+END; $Voto_Traccia_DEL$ LANGUAGE PLPGSQL;
+
+--TRIGGER 2: aggiorna la media di una Traccia all'eliminazione di un voto
+CREATE OR REPLACE TRIGGER Voto_Traccia_DEL
+AFTER DELETE ON VOTA
+FOR EACH ROW
+EXECUTE PROCEDURE Edit_Voto_Traccia_DEL();
+
+--PROCEDURA 3: Dopo aver aggiornato il voto di una traccia bisogna aggiornare i voti dell'album a cui appartiene
+--(CORRETTA)
+CREATE OR REPLACE FUNCTION Edit_Voto_Album_UPD() RETURNS TRIGGER AS $Voto_Album_UPD$
 BEGIN
 	UPDATE ALBUM
 	SET Voto=(SELECT AVG(T.Voto)
@@ -28,44 +59,18 @@ BEGIN
 		  )
 	WHERE CodA=NEW.CodA;
 	RETURN Null;
-END; $Voto_Album$ LANGUAGE PLPGSQL;
+END; $Voto_Album_UPD$ LANGUAGE PLPGSQL;
 
---Passiamo ora alle modifiche relative agli artisti
---(CORRETTA)
-CREATE OR REPLACE FUNCTION Edit_Voto_Artista() RETURNS TRIGGER AS $Voto_Artista$
-BEGIN 
-	UPDATE ARTISTA
-	SET Voto=(SELECT AVG(T.Voto)
-		  FROM TRACCIA AS T,PRODUCE AS P
-		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
-							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=NEW.CodT) and T.Voto > 0
-		 GROUP BY T.CodT)
-	WHERE NomeArte IN (SELECT NomeArte
-			   FROM PRODUCE AS P2
-			   WHERE P2.CodT=NEW.CodT);
-	RETURN NULL;
-END;$Voto_Artista$ LANGUAGE PLPGSQL;
+--TRIGGER 3: modifica il Voto del Album,a fronte della modifica del voto della traccia
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Voto_Album_UPD
+AFTER UPDATE OF Voto ON TRACCIA
+FOR EACH ROW
+EXECUTE PROCEDURE Edit_Voto_Album_UPD();
 
---In conlusione andiamo a modificare i valori di media ntracce e durate per Album quando si aggiunge una traccia al Album
+-- PROCEDURA 4: Dopo l'eliminazione di una traccia bisogna modificare il numero di tracce, la durata e la media dei voti dell'album a cui apparteneva
 --(CORRETTA)
-CREATE OR REPLACE FUNCTION Agg_Traccia_Album() RETURNS TRIGGER AS $Agg_Album$
-BEGIN
-	UPDATE ALBUM
-	SET Ntracce=Ntracce + 1,
-	    Durata=(SELECT sum(Durata)
-			     FROM TRACCIA AS T
-			     WHERE T.CodA=NEW.CodA),
-	    Voto=(SELECT AVG(T.Voto)
-		  FROM  TRACCIA AS T
-		  WHERE T.CodA=NEW.CodA and T.Voto > 0)
-	WHERE CodA=NEW.CodA;
-	RETURN NULL;
-END;$Agg_Album$ LANGUAGE PLPGSQL;
-
--- Facciamo lo stesso in fase di rimozione di una Traccia da un Album
---(CORRETTA)
-CREATE OR REPLACE FUNCTION Rem_Traccia_Album() RETURNS TRIGGER AS $Rem_Album$
+CREATE OR REPLACE FUNCTION Ntracce_Durata_Voto_Album_DEL() RETURNS TRIGGER AS $TRIGGER_Ntracce_Durata_Voto_Album_DEL$
 BEGIN
 	UPDATE ALBUM
 	SET Ntracce=Ntracce-1,
@@ -77,11 +82,100 @@ BEGIN
 		  WHERE T.CodA=OLD.CodA and T.Voto > 0)
 	WHERE CodA=OLD.CodA;
 	RETURN NULL;
-END;$Rem_Album$ LANGUAGE PLPGSQL;
+END;$TRIGGER_Ntracce_Durata_Voto_Album_DEL$ LANGUAGE PLPGSQL;
 
---Passiamo alle Playlist (prima in aggiunta)
+--TRIGGER 4: modifica il numero delle tracce, il tempo e il voto dell'album a cui apparteneva una traccia eliminata
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_Durata_Voto_Album_DEL
+AFTER DELETE ON Traccia
+FOR EACH ROW
+EXECUTE PROCEDURE Ntracce_Durata_Voto_Album_DEL();
+
+--PROCEDURA 5: quando viene aggiunta una traccia bisogna aggiornare il numero di tracce e la durata dell'album a cui appartiene 
 --(CORRETTA)
-CREATE OR REPLACE FUNCTION Agg_Traccia_Playlist() RETURNS TRIGGER AS $Agg_Playlist$
+CREATE OR REPLACE FUNCTION Ntracce_Durata_Album_INS() RETURNS TRIGGER AS $TRIGGER_Ntracce_Durata_Album_INS$
+BEGIN
+	UPDATE ALBUM
+	SET Ntracce=Ntracce + 1,
+	    Durata=(SELECT sum(Durata)
+			     FROM TRACCIA AS T
+			     WHERE T.CodA=NEW.CodA)
+	WHERE CodA=NEW.CodA;
+	RETURN NULL;
+END;$TRIGGER_Ntracce_Durata_Album_INS$ LANGUAGE PLPGSQL;
+
+--TRIGGER 5: modifica numero tracce e durata all'aggiunta di una traccia
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_Durata_Album_INS
+AFTER INSERT ON TRACCIA
+FOR EACH ROW
+EXECUTE PROCEDURE Ntracce_Durata_Album_INS();
+
+--PROCEDURA 6: Dopo aver aggiornato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
+--(CONTROLLARE)
+CREATE OR REPLACE FUNCTION Voto_Artista_UPD() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_UPD$
+BEGIN 
+	UPDATE ARTISTA
+	SET Voto=(SELECT AVG(T.Voto)
+		  FROM TRACCIA AS T,PRODUCE AS P
+		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
+							 FROM PRODUCE AS P1
+							 WHERE P1.CodT=NEW.CodT) and T.Voto > 0)
+	WHERE NomeArte IN (SELECT NomeArte
+			   FROM PRODUCE AS P2
+			   WHERE P2.CodT=NEW.CodT);
+	RETURN NULL;
+END;$TRIGGER_Voto_Artista_UPD$ LANGUAGE PLPGSQL;
+
+--TRIGGER 6: modifica il Voto del Artista,a fronte della modifica del voto della traccia
+--(CONTROLLARE)
+CREATE OR REPLACE TRIGGER TRIGGER_Voto_Artista_UPD
+AFTER UPDATE OF Voto ON TRACCIA
+FOR EACH ROW
+EXECUTE PROCEDURE Voto_Artista_UPD();
+
+--PROCEDURA 7: Dopo aver eliminato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
+--(CONTROLLARE)
+CREATE OR REPLACE FUNCTION Voto_Artista_DEL() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_DEL$
+BEGIN 
+	UPDATE ARTISTA
+	SET Voto=(SELECT AVG(T.Voto)
+		  FROM TRACCIA AS T,PRODUCE AS P
+		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
+							 FROM PRODUCE AS P1
+							 WHERE P1.CodT=OLD.CodT) and T.Voto > 0)
+	WHERE NomeArte IN (SELECT NomeArte
+			   FROM PRODUCE AS P2
+			   WHERE P2.CodT=OLD.CodT);
+	RETURN NULL;
+END;$TRIGGER_Voto_Artista_DEL$ LANGUAGE PLPGSQL;
+
+--TRIGGER 7: modifica il Voto del Artista,a fronte della eliminazione di una traccia
+--(CONTROLLARE)
+CREATE OR REPLACE TRIGGER Voto_Artista_DEL
+AFTER DELETE ON Produce
+FOR EACH ROW
+EXECUTE PROCEDURE Voto_Artista_DEL();
+
+--PROCEDURA 8: Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
+(CORRETTA)
+CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
+BEGIN 
+	insert into Playlist(Titolo, NickName)
+	values('Brani preferiti', New.NickName);
+	RETURN NULL;
+END; $Def_Playlist$ LANGUAGE PLPGSQL;
+
+--TRIGGER 8: creazione playlist default
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Def_Playlist
+AFTER INSERT ON UTENTE
+FOR EACH ROW
+EXECUTE PROCEDURE Playlist_Default();
+
+--PROCEDURA 9: aggiornamento del numero delle tracce e della durata di una playlist quando gli viene aggiunta una traccia
+--(CORRETTA)
+CREATE OR REPLACE FUNCTION Ntracce_durata_Playlist_INS() RETURNS TRIGGER AS $TRIGGER_Ntracce_durata_Playlist_INS$
 BEGIN
 	UPDATE Playlist
 	SET NTracce=NTracce+1,
@@ -91,11 +185,19 @@ BEGIN
 	    
 	WHERE CodP=NEW.CodP; 
 	RETURN NULL;
-END;$Agg_Playlist$ LANGUAGE PLPGSQL;
+END;$TRIGGER_Ntracce_durata_Playlist_INS$ LANGUAGE PLPGSQL;
 
---Infine la rimozione
+--TRIGGER 9: aggiunta di una Traccia in una Playlist
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_durata_Playlist_INS
+AFTER INSERT ON CONTIENE
+FOR EACH ROW
+EXECUTE PROCEDURE Ntracce_durata_Playlist_INS();
+
+
+--PROCEDURA 10: aggiornamento numero tracce e durata alla eliminazione di una traccia che è contenuta in playlist
 --(CORRETTA)
-CREATE OR REPLACE FUNCTION Rem_Traccia_Playlist() RETURNS TRIGGER AS $Rem_Playlist$
+CREATE OR REPLACE FUNCTION Ntracce_durata_Playlist_DEL() RETURNS TRIGGER AS $TRIGGER_Ntracce_durata_Playlist_DEL$
 BEGIN
 	UPDATE Playlist
 	SET NTracce=NTracce-1,
@@ -105,102 +207,15 @@ BEGIN
 	    
 	WHERE CodP=OLD.CodP;
 	RETURN NULL; 
-END;$Rem_Playlist$ LANGUAGE PLPGSQL;
+END;$TRIGGER_Ntracce_durata_Playlist_DEL$ LANGUAGE PLPGSQL;
 
---Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
-(CORRETTA)
-CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
-BEGIN 
-	insert into Playlist(Titolo, NickName)
-	values('Brani preferiti', New.NickName);
-	RETURN NULL;
-END; $Def_Playlist$ LANGUAGE PLPGSQL;
-
---Funzione che aggiorna i voti di un artista quando una traccia viene eliminata
---(DA CONTROLLARE)
-CREATE OR REPLACE FUNCTION Edit_Voto_Artista_Del() RETURNS TRIGGER AS $Voto_Artista_Del$
-BEGIN 
-	UPDATE ARTISTA
-	SET Voto=(SELECT AVG(T.Voto)
-		  FROM TRACCIA AS T,PRODUCE AS P
-		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
-							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=OLD.CodT) and T.Voto > 0
-		 GROUP BY T.CodT)
-	WHERE NomeArte IN (SELECT NomeArte
-			   FROM PRODUCE AS P2
-			   WHERE P2.CodT=OLD.CodT);
-	RETURN NULL;
-END;$Voto_Artista_Del$ LANGUAGE PLPGSQL;
-
--- Conclusa la parte della creazione delle procedure creiamo ora i trigger che faranno uso di queste procedure
-
---Primo Trigger aggiorna la media di una Traccia
---(CORRETTA)
-CREATE OR REPLACE TRIGGER Voto_Traccia_Media
-AFTER INSERT ON VOTA
-FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Traccia();
-
--- Secondo Trigger aggiorna il voto conseguente ad una modifica da parte del utente
+--TRIGGER 10: aggiornamento numero tracce e durata di una playlist dopo che è stata eliminata una traccia che conteneva
 --(CORRETTO)
-CREATE OR REPLACE TRIGGER Voto_Utente_Mod
-AFTER UPDATE OF Voto on VOTA
-FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Traccia();
-
---Terzo Trigger modifica il Voto del Album,a fronte della modifica del voto della traccia
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Voto_Album_Mod
-AFTER UPDATE OF Voto ON TRACCIA
-FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Album();
-
---Quarto Trigger modifica il Voto del Artista,a fronte della modifica del voto della traccia
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Voto_Artista_Mod
-AFTER UPDATE OF Voto ON TRACCIA
-FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Artista();
-
--- Quinto Trigger si attiva quando aggiungiamo una traccia in un Album 
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Agg_Album_Mod
-AFTER INSERT ON TRACCIA --Album chaive esterna
-FOR EACH ROW
-EXECUTE PROCEDURE Agg_Traccia_Album();
-
---Sesto Trigger si attiva quando rimuoviamo una traccia in un Album
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Rem_Album_Mod
-AFTER DELETE ON TRACCIA --Album chaive esterna
-FOR EACH ROW
-EXECUTE PROCEDURE Rem_Traccia_Album();
-
---Settimo Trigger in aggiunta di una Traccia in una Playlist
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Agg_Playlist_Mod
-AFTER INSERT ON CONTIENE
-FOR EACH ROW
-EXECUTE PROCEDURE Agg_Traccia_Playlist();
-
---Ottavo Trigger in rimozione
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Rem_Playlist
+CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_durata_Playlist_DEL
 AFTER DELETE ON CONTIENE
 FOR EACH ROW
-EXECUTE PROCEDURE Rem_Traccia_Playlist();
+EXECUTE PROCEDURE Ntracce_durata_Playlist_DEL();
 
---Trigger per aggiornare il voto di un artista dopo l'eliminazione di una traccia
-(DA CONTROLLARE)
-CREATE OR REPLACE TRIGGER Agg_Voto_Art_Del
-AFTER DELETE ON Traccia
-FOR EACH ROW
-EXECUTE PROCEDURE Edit_Voto_Artista_Del();
 
---Ultimo Trigger Crea una playlist default per l'Utente
---(CORRETTO)
-CREATE OR REPLACE TRIGGER Def_Playlist
-AFTER INSERT ON UTENTE
-FOR EACH ROW
-EXECUTE PROCEDURE Playlist_Default();
+--DA FARE:
+--quando viene eliminato un artista bisogna eliminare tutte le tracce e gli album che ha prodotto
