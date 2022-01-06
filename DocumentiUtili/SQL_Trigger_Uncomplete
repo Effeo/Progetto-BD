@@ -258,29 +258,57 @@ AFTER DELETE ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_durata_Playlist_DEL();
 
---PROCEDURA 11: quando viene eliminato un artista vengono eliminate le tracce e gli album che ha prodotto
+--PROCEDURA 11: quando viene eliminato un'artista vengono eliminate le tracce che ha prodotto
 CREATE OR REPLACE FUNCTION DEL_Artista_Pro() RETURNS TRIGGER AS $TRIGGER_DEL_Artista_Pro$
+DECLARE 
+	CursorTracceNoArt CURSOR for
+	select CodT 
+	from Traccia
+	where CodT not in (Select Codt from Produce) and codT <> 0;
+	
+	TracceNoArt record;
 BEGIN
-	delete from traccia
-	where codt in (Select codt from produce as P where P.NomeArte = OLD.NomeArte);
+	open CursorTracceNoArt;
+	loop
+		fetch CursorTracceNoArt into TracceNoArt;
+		exit when not found;
+		
+		delete from traccia where CodT = TracceNoArt.CodT;
+	end loop;
+	close CursorTracceNoArt;
 	
 	RETURN NULL; 
 END;$TRIGGER_DEL_Artista_Pro$ LANGUAGE PLPGSQL;
 
-CREATE OR REPLACE FUNCTION DEL_Artista_INC() RETURNS TRIGGER AS $TRIGGER_DEL_Artista_INC$
-BEGIN
-
-	delete from album
-	where codA in (Select codA from incide as I where I.NomeArte = OLD.NomeArte);
-	
-	RETURN NULL; 
-END;$TRIGGER_DEL_Artista_INC$ LANGUAGE PLPGSQL;
-
+--TRIGGER 11: eliminazione delle tracce quando un'artista viene eliminato
 CREATE OR REPLACE TRIGGER TRIGGER_DEL_Artista_PRO
 AFTER DELETE ON Produce
 FOR EACH ROW
 EXECUTE PROCEDURE DEL_Artista_PRO();
 
+--PROCEDURA 12: quando viene eliminato un'artista vengono eliminati gli album che ha inciso
+CREATE OR REPLACE FUNCTION DEL_Artista_INC() RETURNS TRIGGER AS $TRIGGER_DEL_Artista_INC$
+DECLARE 
+	CursorAlbumNoArt CURSOR for
+	select CodA 
+	from Album
+	where CodA not in (Select CodA from Incide) and codA <> 0;
+	
+	AlbumNoArt record;
+BEGIN
+	open CursorAlbumNoArt;
+	loop
+		fetch CursorAlbumNoArt into AlbumNoArt;
+		exit when not found;
+		
+		delete from Album where CodA = AlbumNoArt.CodA;
+	end loop;
+	close CursorAlbumNoArt;
+	
+	RETURN NULL; 
+END;$TRIGGER_DEL_Artista_INC$ LANGUAGE PLPGSQL;
+
+--TRIGGER 12: eliminazione degli album incisi da un artista eliminato
 CREATE OR REPLACE TRIGGER TRIGGER_DEL_Artista_INC
 AFTER DELETE ON Incide
 FOR EACH ROW
