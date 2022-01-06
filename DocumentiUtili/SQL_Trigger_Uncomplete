@@ -112,48 +112,89 @@ FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_Durata_Album_INS();
 
 --PROCEDURA 6: Dopo aver aggiornato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
---(CONTROLLARE)
+--(CORRETTO)
 CREATE OR REPLACE FUNCTION Voto_Artista_UPD() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_UPD$
-BEGIN 
-	CREATE OR REPLACE VIEW ArtistaVoto as
+DECLARE 
+	CursorArtistaVoto CURSOR for 
 	select NomeArte, avg(voto) AS votoMedio
 	from Traccia as T, Produce as P
 	where T.Codt = p.CodT and voto > 0
-	group by Nomearte;
-
-	UPDATE ARTISTA
-	SET Voto = (SELECT votoMedio FROM ArtistaVoto where NomeArte in 
-			   (SELECT NomeArte FROM Produce where CodT = New.CodT))
-	WHERE NomeArte in (SELECT NomeArte FROM Produce where CodT = New.CodT);
-	RETURN NULL;
+	group by Nomearte; 
+	
+	ArtistaVoto record;
+	
+BEGIN 
+	open CursorArtistaVoto; 
+	loop 
+		fetch CursorArtistaVoto into ArtistaVoto;
+		exit when not found;
+		
+		update Artista
+		set Voto = ArtistaVoto.votoMedio
+		where NomeArte = ArtistaVoto.NomeArte;
+		
+	end loop;
+	
+	close CursorArtistaVoto;
+	
+	return null;
 END;$TRIGGER_Voto_Artista_UPD$ LANGUAGE PLPGSQL;
 
 --TRIGGER 6: modifica il Voto del Artista,a fronte della modifica del voto della traccia
---(CONTROLLARE)
+--(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Voto_Artista_UPD
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Voto_Artista_UPD();
 
 --PROCEDURA 7: Dopo aver eliminato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
---(CONTROLLARE)
+--(CORRETTO)
 CREATE OR REPLACE FUNCTION Voto_Artista_DEL() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_DEL$
+DECLARE 
+	CursorArtistaVoto CURSOR for 
+	select NomeArte, avg(voto) AS votoMedio
+	from Traccia as T, Produce as P
+	where T.Codt = p.CodT and voto > 0
+	group by Nomearte; 
+	
+	CursorArtistaNoProduce CURSOR for 
+	select Artista.NomeArte
+	from Artista
+	where Artista.NomeArte not in (Select NomeArte From Produce);
+	
+	ArtistaNoProduce record;
+	ArtistaVoto record;
+	
 BEGIN 
-	UPDATE ARTISTA
-	SET Voto=(SELECT AVG(T.Voto)
-		  FROM TRACCIA AS T,PRODUCE AS P
-		  WHERE T.CodT=P.CodT AND P.NomeArte IN (SELECT NomeArte
-							 FROM PRODUCE AS P1
-							 WHERE P1.CodT=OLD.CodT) and T.Voto > 0)
-	WHERE NomeArte IN (SELECT NomeArte
-			   FROM PRODUCE AS P2
-			   WHERE P2.CodT=OLD.CodT);
-	RETURN NULL;
+	open CursorArtistaVoto; 
+	loop 
+		fetch CursorArtistaVoto into ArtistaVoto;
+		exit when not found;
+		
+		update Artista
+		set Voto = ArtistaVoto.votoMedio
+		where NomeArte = ArtistaVoto.NomeArte;
+		
+	end loop;
+	close CursorArtistaVoto;
+	
+	open CursorArtistaNoProduce;
+	loop
+		fetch CursorArtistaNoProduce into ArtistaNoProduce;
+		exit when not found;
+		
+		update Artista
+		set Voto = 0
+		where NomeArte = ArtistaNoProduce.NomeArte;
+	end loop;
+	close CursorArtistaNoProduce;
+	
+	return null;
 END;$TRIGGER_Voto_Artista_DEL$ LANGUAGE PLPGSQL;
 
 --TRIGGER 7: modifica il Voto del Artista,a fronte della eliminazione di una traccia
---(CONTROLLARE)
-CREATE OR REPLACE TRIGGER Voto_Artista_DEL
+--(CORRETTO)
+CREATE OR REPLACE TRIGGER Trigger_Voto_Artista_DEL
 AFTER DELETE ON Produce
 FOR EACH ROW
 EXECUTE PROCEDURE Voto_Artista_DEL();
@@ -217,6 +258,30 @@ AFTER DELETE ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_durata_Playlist_DEL();
 
+--PROCEDURA 11: quando viene eliminato un artista vengono eliminate le tracce e gli album che ha prodotto
+CREATE OR REPLACE FUNCTION DEL_Artista_Pro() RETURNS TRIGGER AS $TRIGGER_DEL_Artista_Pro$
+BEGIN
+	delete from traccia
+	where codt in (Select codt from produce as P where P.NomeArte = OLD.NomeArte);
+	
+	RETURN NULL; 
+END;$TRIGGER_DEL_Artista_Pro$ LANGUAGE PLPGSQL;
 
---DA FARE:
---quando viene eliminato un artista bisogna eliminare tutte le tracce e gli album che ha prodotto
+CREATE OR REPLACE FUNCTION DEL_Artista_INC() RETURNS TRIGGER AS $TRIGGER_DEL_Artista_INC$
+BEGIN
+
+	delete from album
+	where codA in (Select codA from incide as I where I.NomeArte = OLD.NomeArte);
+	
+	RETURN NULL; 
+END;$TRIGGER_DEL_Artista_INC$ LANGUAGE PLPGSQL;
+
+CREATE OR REPLACE TRIGGER TRIGGER_DEL_Artista_PRO
+AFTER DELETE ON Produce
+FOR EACH ROW
+EXECUTE PROCEDURE DEL_Artista_PRO();
+
+CREATE OR REPLACE TRIGGER TRIGGER_DEL_Artista_INC
+AFTER DELETE ON Incide
+FOR EACH ROW
+EXECUTE PROCEDURE DEL_Artista_INC();
