@@ -164,7 +164,7 @@ VALUES('Yes','00:07:06',DEFAULT,2008,FALSE,FALSE,'Pimp','https://open.spotify.co
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Yes','00:07:06',DEFAULT,2008,FALSE,FALSE,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','WAV',DEFAULT,256,1);
 
-INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
+INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTR)
 VALUES('Yes','00:07:06',DEFAULT,2009,FALSE,TRUE,'Pimp','https://open.spotify.com/track/6fw0Ih9M1GQBMi9yqAt1dP?si=d414b661342240ce','FLAC',DEFAULT,512,1,16);
 
 
