@@ -14,6 +14,6 @@
 - [Creazione utente admin fino alla riga 51](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/sql_user.sql#L40)
 
 ### connessione
-username: UserAdmin 
+username: UtenteAdmin 
 
 password: Admin
