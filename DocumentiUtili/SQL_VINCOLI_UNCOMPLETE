@@ -63,29 +63,35 @@ Execute procedure VotoUtentePremium();
 Create or replace Function TracciaCover() returns Trigger as $TracciaCoverTrigger$
 DECLARE
 	TracciaOr Traccia.CodTC%Type;
+	Cover Traccia.IsCover%Type;
 	Cursor_ArtistiO refcursor;
 	ArtistiO record;
 BEGIN
+	SELECT Traccia.IsCover into Cover
+	FROM Traccia
+	where Traccia.CodT = new.Codt;
 	
-	SELECT Traccia.CodTC into TracciaOr
-	FROM Produce, Traccia
-	Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
+	if(Cover) then
+		SELECT Traccia.CodTC into TracciaOr
+		FROM Produce, Traccia
+		Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
 
-	open Cursor_ArtistiO for 
-	SELECT Artista.NomeArte 
-	FROM Artista
-	Where Artista.NomeArte in (Select NomeArte from Produce where codt = TracciaOr);
-	
-	loop
-		fetch Cursor_ArtistiO into ArtistiO;
-		exit when not found;
-		
-		if(ArtistiO.NomeArte = New.NomeArte) then
-			raise exception using errcode = 'ARTOU';
-		end if;
-	end loop;
-	
-	close Cursor_ArtistiO;
+		open Cursor_ArtistiO for 
+		SELECT Artista.NomeArte 
+		FROM Artista
+		Where Artista.NomeArte in (Select NomeArte from Produce where codt = TracciaOr);
+
+		loop
+			fetch Cursor_ArtistiO into ArtistiO;
+			exit when not found;
+
+			if(ArtistiO.NomeArte = New.NomeArte) then
+				raise exception using errcode = 'ARTOU';
+			end if;
+		end loop;
+
+		close Cursor_ArtistiO;
+	end if;
 	Return null;
 	
 EXCEPTION 
@@ -101,33 +107,34 @@ After Insert on Produce
 FOR EACH ROW
 Execute procedure TracciaCover();
 
---Quarto trigger: il formato della remastered deve essere maggiore di quella originale e l'anno deve essere maggiore dell'originale
+--Quarto vincolo: il formato della remastered deve essere maggiore di quella originale e l'anno deve essere maggiore dell'originale
 --CODICE ERRORE: FATRE (Formato anno remastered)
 Create or replace Function FormatoAnnoRemastered() returns Trigger as $FormatoAnnoRemasteredTrigger$
 DECLARE
 	FormatoO Traccia.Formato%Type;
 	AnnoO Traccia.AnnoU%Type;
 BEGIN
-	SELECT Traccia.Formato into FormatoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTR;
-	
-	SELECT Traccia.AnnoU into AnnoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTR;
-	
-	if(FormatoO = 'MP3' and new.Formato = 'MP3')then
-		raise exception using errcode = 'FATRE';
-	elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
-		raise exception using errcode = 'FATRE';
-	elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
-		raise exception using errcode = 'FATRE';
+	if(New.IsRemastered) then
+		SELECT Traccia.Formato into FormatoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTR;
+
+		SELECT Traccia.AnnoU into AnnoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTR;
+
+		if(FormatoO = 'MP3' and new.Formato = 'MP3')then
+			raise exception using errcode = 'FATRE';
+		elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
+			raise exception using errcode = 'FATRE';
+		elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
+			raise exception using errcode = 'FATRE';
+		end if;
+
+		if(New.AnnoU <= AnnoO) then
+			raise exception using errcode = 'FATRE';
+		end if;
 	end if;
-	
-	if(New.AnnoU <= AnnoO) then
-		raise exception using errcode = 'FATRE';
-	end if;
-	
 	Return null;
 EXCEPTION 
 	when SQLSTATE 'FATRE'then
@@ -142,25 +149,34 @@ After Insert on Traccia
 FOR EACH ROW
 Execute procedure FormatoAnnoRemastered();
 
---Quinto trigger: L'anno della cover deve essere maggiore uguale dell'originale e l'album di apparteneza deve essere diverso
+--Quinto vincolo: L'anno della cover deve essere maggiore uguale dell'originale e l'album di apparteneza deve essere diverso
+--CODICE ERRORE: AANCO (anno cover minore dell'originale)
 Create or replace Function AlbumAnnoCover() returns Trigger as $AlbumAnnoCoverTrigger$
 DECLARE
 	CodAO Traccia.CodA%Type;
 	AnnoO Traccia.AnnoU%Type;
+	
 BEGIN
-	SELECT Traccia.CodA into CodAO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTC;
-	
-	SELECT Traccia.AnnoU into AnnoO
-	FROM Traccia
-	Where Traccia.CodT = New.CodTC;
-	
-	if(CodAO = new.CodA or new.AnnoU < AnnoO) then
-		delete from Traccia where Codt = new.CodT;
+	if(New.IsCover) then
+		SELECT Traccia.CodA into CodAO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTC;
+
+		SELECT Traccia.AnnoU into AnnoO
+		FROM Traccia
+		Where Traccia.CodT = New.CodTC;
+
+		if(CodAO = new.CodA or new.AnnoU < AnnoO) then
+			raise exception using errcode = 'AANCO';
+		end if;
 	end if;
-	
 	Return null;
+	
+EXCEPTION 
+	when SQLSTATE 'AANCO'then
+		raise notice 'ERRORE: Album uguale all originale o anno minore';
+		delete from Traccia where (CodT = New.CodT);
+		RETURN NULL;
 END; $AlbumAnnoCoverTrigger$ Language plpgsql;
 
 --Trigger per il quinto vincolo
