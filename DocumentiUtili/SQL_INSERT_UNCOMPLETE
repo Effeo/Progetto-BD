@@ -478,10 +478,10 @@ INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',12);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Coldplay',13);
+VALUES('ColdPlay',13);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Coldpay',14);
+VALUES('ColdPlay',14);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',15);
