@@ -1,3 +1,21 @@
+CREATE DOMAIN Type_Formato as varchar(4)
+CHECK (value = 'MP3' or value = 'WAV' or value = 'FLAC');
+
+CREATE DOMAIN Type_Qualita as integer 
+CHECK (value = 128 or value = 256 or value = 512);
+
+CREATE DOMAIN Type_Email as varchar(100) 
+CHECK (value LIKE '_%@_%._%');
+
+CREATE DOMAIN Type_Sesso as varchar(15)
+CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' or Sesso = 'Transgender'or Sesso = 'Lampadina' or Sesso = 'Unicorno');
+
+CREATE DOMAIN Type_Fascia as integer
+CHECK (value >= 1 and value <= 6);
+
+CREATE DOMAIN Type_Voto integer
+CHECK (value >= 0 and value <= 10);
+
 CREATE TABLE ALBUM (
 	CodA SERIAL,
 	Titolo VARCHAR(50) NOT NULL,
@@ -21,9 +39,9 @@ CREATE TABLE TRACCIA (
 	IsRemastered BOOLEAN DEFAULT FALSE,
 	Genere VARCHAR(30) NOT NULL,
 	Link VARCHAR(300),
-	Formato VARCHAR(4) DEFAULT 'MP3',
+	Formato Type_Formato DEFAULT 'MP3',
 	Voto NUMERIC(2,2) DEFAULT 0,
-	Qualita INTEGER DEFAULT 128,
+	Qualita Type_Qualita DEFAULT 128,
 	CodA INTEGER DEFAULT 0,
 	CodTR INTEGER DEFAULT 0,
 	CodTC INTEGER DEFAULT 0,
@@ -49,10 +67,10 @@ CREATE TABLE UTENTE (
 	NickName VARCHAR(20),
 	Nome VARCHAR(30) NOT NULL,
 	Cognome VARCHAR(30) NOT NULL,
-	Email VARCHAR(100) NOT NULL,
+	Email Type_Email NOT NULL,
 	Password VARCHAR(20) NOT NULL,
 	DataN DATE NOT NULL,
-	Sesso VARCHAR(15) NOT NULL,
+	Sesso Type_Sesso NOT NULL,
 	Nazionalita VARCHAR(15) DEFAULT NULL,
 	Descrizione VARCHAR(100) DEFAULT NULL,
 	IsPremium BOOLEAN DEFAULT FALSE,
@@ -84,7 +102,7 @@ CREATE TABLE PLAYLIST(
 CREATE TABLE ASCOLTA (
 	Nickname VARCHAR(20),
 	CodT INTEGER,
-	FasciaOraria INTEGER NOT NULL,
+	FasciaOraria Type_Fascia NOT NULL,
 	
 	FOREIGN KEY (NickName) REFERENCES UTENTE(NickName)
 		ON DELETE CASCADE
@@ -99,7 +117,7 @@ CREATE TABLE ASCOLTA (
 CREATE TABLE VOTA (
 	NickName VARCHAR(20),
 	CodT INTEGER,
-	Voto INTEGER NOT NULL,
+	Voto Type_Voto NOT NULL,
 	
 	UNIQUE(NickName, CodT),
 	
