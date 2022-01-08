@@ -478,7 +478,7 @@ INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',12);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Coldpay',13);
+VALUES('Coldplay',13);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Coldpay',14);
@@ -649,7 +649,7 @@ INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Artisti Vari',69); --Nice --
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Artisti vari',70);
+VALUES('Artisti Vari',70);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Imagine Dragons',71);
