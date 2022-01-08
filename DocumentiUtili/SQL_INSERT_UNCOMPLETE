@@ -100,7 +100,8 @@ VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
 
 --Finiti gli Album Creiamo le Tracce--
-
+INSERT INTO TRACCIA(CodT,Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
+VALUES(0, 'Fittizio','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte',default,'MP3',DEFAULT,128,0);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','MP3',DEFAULT,128,1);
