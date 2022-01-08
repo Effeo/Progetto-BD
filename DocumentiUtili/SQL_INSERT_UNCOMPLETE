@@ -207,7 +207,7 @@ INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Li
 VALUES('Death and Hills','00:06:18',DEFAULT,2008,FALSE,FALSE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTR)
-VALUES('Death and Hills','00:06:18',DEFAULT,2009,FALSE,TRUE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','FLAC',DEFAULT,516,1,28);
+VALUES('Death and Hills','00:06:18',DEFAULT,2009,FALSE,TRUE,'Bomb','https://open.spotify.com/track/36kG5UXshT0PqnZKsgU8c2?si=630215581c6c4476','FLAC',DEFAULT,512,1,28);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
