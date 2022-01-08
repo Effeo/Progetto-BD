@@ -8,7 +8,7 @@
 - [Popolamento Tracce fino alla riga 1042](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/Codice.sql#L765)
 - [Popolamento utenti fino alla riga 1058](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/Codice.sql#L1044)
 - [Popolamento incisioni fino alla riga 1098](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/Codice.sql#L1060)
-- [Popolamneot produzioni fino alla riga 1348](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/Codice.sql#L1100)
+- [Popolamento produzioni fino alla riga 1348](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/Codice.sql#L1100)
 
 ### connessione
 username: UserAdmin 
