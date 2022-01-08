@@ -531,8 +531,8 @@ VALUES('ColdPlay',29);
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',30);
 
-INSERT INTO PRODUCE(NomeArte,Cod T)
-VALUES('USA for Africa,31);
+INSERT INTO PRODUCE(NomeArte,CodT)
+VALUES('USA for Africa',31);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Boney M.',32);
