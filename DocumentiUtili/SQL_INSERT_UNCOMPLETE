@@ -149,10 +149,10 @@ VALUES('42','00:03:56',DEFAULT,2012,FALSE,TRUE,'Punk','https://open.spotify.com/
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','MP3',DEFAULT,128,1);
+VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,FALSE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','WAV',DEFAULT,256,1);
+VALUES('Lovers In Japan','00:06:51',DEFAULT,2008,FALSE,FALSE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTR)
 VALUES('Lovers In Japan','00:06:51',DEFAULT,2012,FALSE,TRUE,'Dance','https://open.spotify.com/track/2GkCxLKP04KfDpUYLTmTNl?si=2c683b312db1479f','FLAC',DEFAULT,512,1,13);
