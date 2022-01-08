@@ -191,13 +191,13 @@ INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Li
 VALUES('Violet Hill','00:03:42',DEFAULT,2009,FALSE,TRUE,'Bimb','https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','FLAC',DEFAULT,512,1,22);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Strawberry Swing','00:04:09',2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,128,1);
+VALUES('Strawberry Swing','00:04:09',DEFAULT,2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Strawberry Swing','00:04:09',2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','WAV',DEFAULT,256,1);
+VALUES('Strawberry Swing','00:04:09',DEFAULT,2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTR)
-VALUES('Strawberry Swing','00:04:09',2012,FALSE,TRUE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','FLAC',DEFAULT,512,1,25);
+VALUES('Strawberry Swing','00:04:09',DEFAULT,2012,FALSE,TRUE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','FLAC',DEFAULT,512,1,25);
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
