@@ -690,43 +690,7 @@ VALUES('Cristina Davena',82);
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Giorgio Vanni',82);
 
--- Associamo ora gli album ai rispettivi artisti -- 
 
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('ColdPlay',1);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('USA for Africa',2);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Boney M.',3);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Squallor',4);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Daft Punk',5);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Molchat Doma',6);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Paul Kalkbrenner',7);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Randy Newman',8);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Camille',8);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Cristina Davena',9);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Giorgio Vanni',9);
-
-INSERT INTO INCIDE(NomeArte,CodA)
-VALUES('Maneskin',10);
 
 
 
