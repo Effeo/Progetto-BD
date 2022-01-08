@@ -8,7 +8,7 @@ CREATE DOMAIN Type_Email as varchar(100)
 CHECK (value LIKE '_%@_%._%');
 
 CREATE DOMAIN Type_Sesso as varchar(15)
-CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' or Sesso = 'Transgender'or Sesso = 'Lampadina' or Sesso = 'Unicorno');
+CHECK (value = 'Uomo' or value = 'Donna' or value = 'Altro' or value = 'Transgender'or value = 'Lampadina' or value = 'Unicorno');
 
 CREATE DOMAIN Type_Fascia as integer
 CHECK (value >= 1 and value <= 6);
