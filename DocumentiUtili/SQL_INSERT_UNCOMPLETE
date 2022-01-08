@@ -616,13 +616,13 @@ INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Molchat Doma',58);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Paul Kalbrenner',59);
+VALUES('Paul Kalkbrenner',59);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Paul Kalbrenner',60);
+VALUES('Paul Kalkbrenner',60);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
-VALUES('Paul Kalbrenner',61);
+VALUES('Paul Kalkbrenner',61);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Randy Newman',62);
