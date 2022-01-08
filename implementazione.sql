@@ -1,21 +1,30 @@
+--DEFINIZIONE DEI DOMINII
+--Dominio per il formato della traccia
 CREATE DOMAIN Type_Formato as varchar(4)
 CHECK (value = 'MP3' or value = 'WAV' or value = 'FLAC');
 
+--Dominio per la qualità della traccia
 CREATE DOMAIN Type_Qualita as integer 
 CHECK (value = 128 or value = 256 or value = 512);
 
+--Dominio per l'email dell'utente
 CREATE DOMAIN Type_Email as varchar(100) 
 CHECK (value LIKE '_%@_%._%');
 
+--Dominio per il sesso dell'utente
 CREATE DOMAIN Type_Sesso as varchar(15)
 CHECK (value = 'Uomo' or value = 'Donna' or value = 'Altro' or value = 'Transgender'or value = 'Lampadina' or value = 'Unicorno');
 
+--Dominio per la fascia oraria dell'ascolto
 CREATE DOMAIN Type_Fascia as integer
 CHECK (value >= 1 and value <= 6);
 
+--Dominio per il voto dato dall'utente
 CREATE DOMAIN Type_Voto integer
 CHECK (value >= 0 and value <= 10);
 
+--DEFINIZIONE DELLE TABELLE
+--ALBUM
 CREATE TABLE ALBUM (
 	CodA SERIAL,
 	Titolo VARCHAR(50) NOT NULL,
@@ -28,7 +37,7 @@ CREATE TABLE ALBUM (
 	PRIMARY KEY (CodA)
 );
 
-
+--TRACCIA
 CREATE TABLE TRACCIA (
 	CodT SERIAL,
 	Titolo VARCHAR(50) NOT NULL,
@@ -56,13 +65,10 @@ CREATE TABLE TRACCIA (
 		ON UPDATE CASCADE,
 	FOREIGN KEY (CodTC) REFERENCES Traccia(CodT)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	
-	CHECK (Formato = 'MP3' or Formato = 'WAV' or Formato = 'FLAC'),
-	CHECK (Qualita = 128 or Qualita = 256 or Qualita = 512)
+		ON UPDATE CASCADE
 );
 
-
+--UTENTE
 CREATE TABLE UTENTE (
 	NickName VARCHAR(20),
 	Nome VARCHAR(30) NOT NULL,
@@ -78,12 +84,10 @@ CREATE TABLE UTENTE (
 
 	PRIMARY KEY (NickName),
 	
-	UNIQUE(Email),
-	CHECK (Email LIKE '_%@_%._%'),
-	CHECK (Sesso = 'Uomo' or Sesso = 'Donna' or Sesso = 'Altro' or Sesso = 'Transgender'or Sesso = 'Lampadina' or Sesso = 'Unicorno')
+	UNIQUE(Email)
 );
 
-
+--PLAYLIST
 CREATE TABLE PLAYLIST(
 	CodP SERIAL,
 	Titolo VARCHAR(20) NOT NULL,
@@ -98,7 +102,7 @@ CREATE TABLE PLAYLIST(
 		ON UPDATE CASCADE
 );
 
-
+--ASCOLTA
 CREATE TABLE ASCOLTA (
 	Nickname VARCHAR(20),
 	CodT INTEGER,
@@ -109,11 +113,10 @@ CREATE TABLE ASCOLTA (
 		ON UPDATE CASCADE,
 	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	
-	CHECK(FasciaOraria >= 1 and FasciaOraria <= 6) 
+		ON UPDATE CASCADE
 );
 
+--VOTA
 CREATE TABLE VOTA (
 	NickName VARCHAR(20),
 	CodT INTEGER,
@@ -126,11 +129,10 @@ CREATE TABLE VOTA (
 		ON UPDATE CASCADE,
 	FOREIGN KEY (CodT) REFERENCES TRACCIA(CodT)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE,	
-	
-	CHECK(Voto >= 1 and Voto <= 10)
+		ON UPDATE CASCADE
 );
 
+--CONTIENE
 CREATE TABLE CONTIENE (
 	CodP INTEGER,
 	CodT INTEGER,
@@ -145,7 +147,7 @@ CREATE TABLE CONTIENE (
 		ON UPDATE CASCADE
 );
 
-
+--ARTISTA
 CREATE TABLE ARTISTA (
 	NomeArte VARCHAR(30),
 	Descrizione VARCHAR(300) DEFAULT NULL,
@@ -154,6 +156,7 @@ CREATE TABLE ARTISTA (
 	PRIMARY KEY(NomeArte)
 );
 
+--INCIDE
 CREATE TABLE INCIDE (
 	NomeArte VARCHAR(30),
 	CodA INTEGER,
@@ -167,6 +170,7 @@ CREATE TABLE INCIDE (
 		ON UPDATE CASCADE
 );
 
+--PRODUCE
 CREATE TABLE PRODUCE (
 	NomeArte VARCHAR(30),
 	CodT INTEGER,
@@ -180,11 +184,9 @@ CREATE TABLE PRODUCE (
 		ON UPDATE CASCADE
 );
 
---In questo blocco inseriremo prima tutte le funzioni che useremo quando attiveremo i Trigger
--- E poi dichiareremo i sudetti Trigger
 
+--PROCEDURE E TRIGGER PER LE AUTOMAZIONI
 --PROCEDURA 1: All'aggiunta di un voto viene fatta la media in Traccia
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia_INS() RETURNS TRIGGER AS $Voto_Traccia_INS$
 BEGIN
 	UPDATE TRACCIA
@@ -197,7 +199,6 @@ BEGIN
 END; $Voto_Traccia_INS$ LANGUAGE PLPGSQL;
 
 --TRIGGER 1: aggiorna la media di una Traccia all'inserimento di un voto
---(CORRETTA)
 CREATE OR REPLACE TRIGGER Voto_Traccia_INS
 AFTER INSERT ON VOTA
 FOR EACH ROW
@@ -205,14 +206,12 @@ EXECUTE PROCEDURE Edit_Voto_Traccia_INS();
 
 
 -- TRIGGER 1.2: aggiorna il voto di una traccia dopo la modifica di un voto
---(CORRETTO)
 CREATE OR REPLACE TRIGGER Voto_Traccia_UPD
 AFTER UPDATE OF Voto on VOTA
 FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Traccia_INS();
 
 --PROCEDURA 2: Dopo l'eliminazione di un voto viene aggiornata la media in Traccia
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Traccia_DEL() RETURNS TRIGGER AS $Voto_Traccia_DEL$
 BEGIN
 	UPDATE TRACCIA
@@ -231,7 +230,6 @@ FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Traccia_DEL();
 
 --PROCEDURA 3: Dopo aver aggiornato il voto di una traccia bisogna aggiornare i voti dell'album a cui appartiene
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Edit_Voto_Album_UPD() RETURNS TRIGGER AS $Voto_Album_UPD$
 BEGIN
 	UPDATE ALBUM
@@ -244,14 +242,12 @@ BEGIN
 END; $Voto_Album_UPD$ LANGUAGE PLPGSQL;
 
 --TRIGGER 3: modifica il Voto del Album,a fronte della modifica del voto della traccia
---(CORRETTO)
 CREATE OR REPLACE TRIGGER Voto_Album_UPD
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Edit_Voto_Album_UPD();
 
 -- PROCEDURA 4: Dopo l'eliminazione di una traccia bisogna modificare il numero di tracce, la durata e la media dei voti dell'album a cui apparteneva
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Ntracce_Durata_Voto_Album_DEL() RETURNS TRIGGER AS $TRIGGER_Ntracce_Durata_Voto_Album_DEL$
 BEGIN
 	UPDATE ALBUM
@@ -267,14 +263,12 @@ BEGIN
 END;$TRIGGER_Ntracce_Durata_Voto_Album_DEL$ LANGUAGE PLPGSQL;
 
 --TRIGGER 4: modifica il numero delle tracce, il tempo e il voto dell'album a cui apparteneva una traccia eliminata
---(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_Durata_Voto_Album_DEL
 AFTER DELETE ON Traccia
 FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_Durata_Voto_Album_DEL();
 
 --PROCEDURA 5: quando viene aggiunta una traccia bisogna aggiornare il numero di tracce e la durata dell'album a cui appartiene 
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Ntracce_Durata_Album_INS() RETURNS TRIGGER AS $TRIGGER_Ntracce_Durata_Album_INS$
 BEGIN
 	UPDATE ALBUM
@@ -287,14 +281,12 @@ BEGIN
 END;$TRIGGER_Ntracce_Durata_Album_INS$ LANGUAGE PLPGSQL;
 
 --TRIGGER 5: modifica numero tracce e durata all'aggiunta di una traccia
---(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_Durata_Album_INS
 AFTER INSERT ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_Durata_Album_INS();
 
 --PROCEDURA 6: Dopo aver aggiornato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
---(CORRETTO)
 CREATE OR REPLACE FUNCTION Voto_Artista_UPD() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_UPD$
 DECLARE 
 	CursorArtistaVoto CURSOR for 
@@ -323,14 +315,12 @@ BEGIN
 END;$TRIGGER_Voto_Artista_UPD$ LANGUAGE PLPGSQL;
 
 --TRIGGER 6: modifica il Voto del Artista,a fronte della modifica del voto della traccia
---(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Voto_Artista_UPD
 AFTER UPDATE OF Voto ON TRACCIA
 FOR EACH ROW
 EXECUTE PROCEDURE Voto_Artista_UPD();
 
 --PROCEDURA 7: Dopo aver eliminato il voto di una traccia bisogna aggiornare il voto degli artisti che l'hanno prodotta
---(CORRETTO)
 CREATE OR REPLACE FUNCTION Voto_Artista_DEL() RETURNS TRIGGER AS $TRIGGER_Voto_Artista_DEL$
 DECLARE 
 	CursorArtistaVoto CURSOR for 
@@ -375,14 +365,12 @@ BEGIN
 END;$TRIGGER_Voto_Artista_DEL$ LANGUAGE PLPGSQL;
 
 --TRIGGER 7: modifica il Voto del Artista,a fronte della eliminazione di una traccia
---(CORRETTO)
 CREATE OR REPLACE TRIGGER Trigger_Voto_Artista_DEL
 AFTER DELETE ON Produce
 FOR EACH ROW
 EXECUTE PROCEDURE Voto_Artista_DEL();
 
 --PROCEDURA 8: Creazione della playlist brani preferiti quando viene aggiunto un nuovo utente
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Playlist_Default() RETURNS TRIGGER AS $Def_Playlist$
 BEGIN 
 	insert into Playlist(Titolo, NickName)
@@ -391,14 +379,12 @@ BEGIN
 END; $Def_Playlist$ LANGUAGE PLPGSQL;
 
 --TRIGGER 8: creazione playlist default
---(CORRETTO)
 CREATE OR REPLACE TRIGGER Def_Playlist
 AFTER INSERT ON UTENTE
 FOR EACH ROW
 EXECUTE PROCEDURE Playlist_Default();
 
 --PROCEDURA 9: aggiornamento del numero delle tracce e della durata di una playlist quando gli viene aggiunta una traccia
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Ntracce_durata_Playlist_INS() RETURNS TRIGGER AS $TRIGGER_Ntracce_durata_Playlist_INS$
 BEGIN
 	UPDATE Playlist
@@ -412,15 +398,12 @@ BEGIN
 END;$TRIGGER_Ntracce_durata_Playlist_INS$ LANGUAGE PLPGSQL;
 
 --TRIGGER 9: aggiunta di una Traccia in una Playlist
---(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_durata_Playlist_INS
 AFTER INSERT ON CONTIENE
 FOR EACH ROW
 EXECUTE PROCEDURE Ntracce_durata_Playlist_INS();
 
-
 --PROCEDURA 10: aggiornamento numero tracce e durata alla eliminazione di una traccia che è contenuta in playlist
---(CORRETTA)
 CREATE OR REPLACE FUNCTION Ntracce_durata_Playlist_DEL() RETURNS TRIGGER AS $TRIGGER_Ntracce_durata_Playlist_DEL$
 BEGIN
 	UPDATE Playlist
@@ -434,7 +417,6 @@ BEGIN
 END;$TRIGGER_Ntracce_durata_Playlist_DEL$ LANGUAGE PLPGSQL;
 
 --TRIGGER 10: aggiornamento numero tracce e durata di una playlist dopo che è stata eliminata una traccia che conteneva
---(CORRETTO)
 CREATE OR REPLACE TRIGGER TRIGGER_Ntracce_durata_Playlist_DEL
 AFTER DELETE ON CONTIENE
 FOR EACH ROW
@@ -496,6 +478,7 @@ AFTER DELETE ON Incide
 FOR EACH ROW
 EXECUTE PROCEDURE DEL_Artista_INC();
 
+--IMPLEMENTAZIONE VINCOLI PIU' COMPLESSI
 --primo vincolo: un utente non premium non può ascoltare tracce di qualità maggiore al 128
 --CODICE ERRORE: QLNPR (qualita non premium)
 Create or replace Function UtentePremium() returns Trigger as $AscoltiNoPremium$
@@ -683,8 +666,8 @@ After Insert on Traccia
 FOR EACH ROW
 Execute procedure AlbumAnnoCover();
 
--- Inserisco prima gli Artisti--
-
+--POPOLAMENTO
+--ARTISTI
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('ColdPlay','Si divertono a creare generi, non aiutandoci a fare questo progetto...',DEFAULT);
 
@@ -745,10 +728,7 @@ VALUES ('Odeon Boys',DEFAULT,DEFAULT);
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('Artisti Vari','Non mi pagano abbastanza per continuare',DEFAULT);
 
-
-
--- Creiamo ora gli album degli Artisti creati--
-
+--ALBUM
 INSERT INTO ALBUM (CodA, Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
 VALUES(0,'Fittizio',2008,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
@@ -782,9 +762,7 @@ VALUES('Italia 1',2020,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO ALBUM (Titolo,AnnoU,Durata,Ntracce,Etichetta,Voto)
 VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
-
-
---Finiti gli Album Creiamo le Tracce--
+--TRACCE
 INSERT INTO TRACCIA(CodT,Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES(0, 'Fittizio','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte',default,'MP3',DEFAULT,128,0);
 
@@ -1060,14 +1038,10 @@ VALUES('Viva La Vida','00:04:02',DEFAULT,2023,TRUE,FALSE,'Classica','https://ope
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Begin','00:03:31',DEFAULT,2020,FALSE,FALSE,'Rock','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','FLAC',DEFAULT,512,10);
 
---Aggiunte dopo--
-
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Holly e benji','00:03:04',DEFAULT,2020,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/3Wrjm47oTz2sjIgck11l5e?si=a69bd451b8df459f','WAV',DEFAULT,512,DEFAULT);
 
-
--- Inseriamo ora gli Utenti -- 
-
+-- UTENTI
 INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
 Values('Rami', 'MaleK', 'Rami_Malek','silvio.barra@unina.it','I@mMrR0bot','1991-01-01','Uomo',DEFAULT,'Google is the way',TRUE,TRUE);
 
@@ -1083,8 +1057,7 @@ Values('Francesco', 'Orlando', 'Effeo','francesco.orlando3@studenti.unina.it','y
 INSERT INTO UTENTE(Nome,Cognome,Nickname,Email,Password,DataN,Sesso,Nazionalita,Descrizione,IsPremium,IsAdmin)
 Values('Marco', 'Pastore', 'ElPator', 'loso@ahokok.com','Miscusi','2002-01-01','Donna',DEFAULT,'Mi scusi Posso fare una Domanda',FALSE,FALSE); --Cute--
 
--- Associamo agli album gli artisti --
-
+--INCISIONI
 INSERT INTO INCIDE (NomeArte,CodA)
 Values('ColdPlay',1);
 
@@ -1124,8 +1097,7 @@ Values('Odeon Boys',9);
 INSERT INTO INCIDE (NomeArte,CodA)
 Values('Maneskin',10);
 
---Associamo ad ogni traccia il suo artista --
-
+--PRODUZIONI
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('ColdPlay',1);
 
