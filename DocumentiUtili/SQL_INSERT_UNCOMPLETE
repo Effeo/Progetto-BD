@@ -101,9 +101,6 @@ VALUES('Fantasy',2023,DEFAULT,DEFAULT,DEFAULT,DEFAULT);
 
 --Finiti gli Album Creiamo le Tracce--
 
-INSERT INTO TRACCIA(CodT,Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES(0, 'Fittizio','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte',DEFAULT,'MP3',DEFAULT,128,0);
-
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Life in Technicolors','00:02:29',DEFAULT,2008,FALSE,FALSE,'Arte','https://open.spotify.com/track/7MT5mNCNNCoW6XP265UkdS?si=0250a49e39c7482a','MP3',DEFAULT,128,1);
@@ -184,15 +181,13 @@ VALUES('Viva La Vida','00:04:02',DEFAULT,2008,FALSE,TRUE,'Bamb','https://open.sp
 
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','MP3',DEFAULT,128,1);
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb','https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','MP3',DEFAULT,128,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','WAV',DEFAULT,256,1);
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,FALSE,'Bimb','https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','WAV',DEFAULT,256,1);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTR)
-VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,TRUE,'Bimb,'https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','FLAC',DEFAULT,512,1,22);
-
-
+VALUES('Violet Hill','00:03:42',DEFAULT,2008,FALSE,TRUE,'Bimb','https://open.spotify.com/track/5147DzKnamWyQdZwsYLHEJ?si=e60ef222e1e54eb5','FLAC',DEFAULT,512,1,22);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Strawberry Swing','00:04:09',2008,FALSE,FALSE,'Bumb','https://open.spotify.com/track/4NmcfahJGawtwaMATGgP0L?si=8d98ed1ba6a24ab9','MP3',DEFAULT,128,1);
@@ -314,7 +309,7 @@ INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Li
 VALUES('Revolte','00:02:39',DEFAULT,2013,FALSE,FALSE,'Tech House','https://open.spotify.com/track/439ZObTQ35Py7TMGNUJmlp?si=d7c48a1fa15f4b9d','MP3',DEFAULT,128,7);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
-VALUES('Train','00:02:48',DEFAULT,2013,FALSE,FALSE,'Tech House','https://open.spotify.com/track/0Tcm3XyhznXJOUoSVlNX7M?si=5aa08fc0349a4f9e','MP3,DEFAULT,128,7);
+VALUES('Train','00:02:48',DEFAULT,2013,FALSE,FALSE,'Tech House','https://open.spotify.com/track/0Tcm3XyhznXJOUoSVlNX7M?si=5aa08fc0349a4f9e','MP3',DEFAULT,128,7);
 
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA)
 VALUES('Monsters Inc','00:02:06',DEFAULT,2001,FALSE,TRUE,'Cartoon','https://open.spotify.com/track/5e0O7MjhNHq9G67qDFM8nR?si=e9748639b7c34b45','MP3',DEFAULT,128,8);
@@ -364,7 +359,6 @@ INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Li
 VALUES('Dan Dan','00:03:30',DEFAULT,1995,FALSE,FALSE,'Cartoon','https://open.spotify.com/track/6vjNTrHMJuoktlhC7PFAJY?si=c6bbe8a6978446c0','MP3',DEFAULT,128,DEFAULT);
 
 -- Passiamo alle tracce dei Maneskin...ops le cover--
-76
 INSERT INTO TRACCIA(Titolo,Durata,Etichetta,AnnoU,IsCover,IsRemastered,Genere,Link,Formato,Voto,Qualita,CodA,CodTC)
 VALUES('Tanzevat','00:03:22',DEFAULT,2023,TRUE,FALSE,'American After-Punk','https://open.spotify.com/track/782VcXkRqyevFaJlcoIIEz?si=5c4780b13540431f','MP3',DEFAULT,128,DEFAULT,56);
 
