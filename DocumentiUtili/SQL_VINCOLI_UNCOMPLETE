@@ -1,5 +1,5 @@
---FUNZIONI PER I VINCOLI
 --primo vincolo: un utente non premium non può ascoltare tracce di qualità maggiore al 128
+--CODICE ERRORE: QLNPR (qualita non premium)
 Create or replace Function UtentePremium() returns Trigger as $AscoltiNoPremium$
 DECLARE
 	Qualita1 Traccia.Qualita%TYPE;
@@ -14,12 +14,25 @@ BEGIN
 	Where New.NickName = Utente.NickName;
 	
 	if(Qualita1 > 128 and not IsPremium1) then
-		Delete From Ascolta Where (Ascolta.CodT = new.CodT and Ascolta.NickName = NEW.NickName);
+		raise exception using errcode = 'QLNPR';
 	end if;
 	Return null;
+
+EXCEPTION 
+	when SQLSTATE 'QLNPR'then
+		raise notice 'ERRORE: qualita della traccia non supportata dal tipo di account';
+		Delete From Ascolta Where (Ascolta.CodT = new.CodT and Ascolta.NickName = NEW.NickName);
+		RETURN NULL;
 END;$AscoltiNoPremium$ Language plpgsql;
 
---seconda funzione: i voti devono essere di utenti premium
+--Trigger per il primo vincolo
+Create or replace Trigger AscoltiNoPremium 
+After Insert on Ascolta
+FOR EACH ROW
+Execute procedure UtentePremium();
+
+--secondo vincolo: i voti devono essere di utenti premium
+--CODICE ERROE: VTNPR (voto no premium)
 Create or replace Function VotoUtentePremium() returns Trigger as $VotiNoPremium$
 DECLARE
 	IsPremium1 Utente.IsPremium%TYPE;
@@ -29,34 +42,67 @@ BEGIN
 	Where New.NickName = Utente.NickName;
 	
 	if(not IsPremium1) then
-		Delete From Vota Where (Vota.CodT = new.CodT and Vota.NickName = NEW.NickName);
+		raise exception using errcode = 'VTNPR';
 	end if;
 	Return null;
+EXCEPTION 
+	when SQLSTATE 'VTNPR'then
+		raise notice 'ERRORE: voto dato da un account non premium';
+		Delete From Vota Where (Vota.CodT = new.CodT and Vota.NickName = NEW.NickName);
+		RETURN NULL;
 END;$VotiNoPremium$ Language plpgsql;
 
---Terzo trigger: se una traccia è cover allora deve avere artista diverso dall'originale
+--Trigger per il secondo vincolo
+Create or replace Trigger VotiNoPremium 
+After Insert on Vota
+FOR EACH ROW
+Execute procedure VotoUtentePremium();
+
+--Terzo vincolo: se una traccia è cover allora deve avere artista diverso dall'originale
+--CODICE ERROE: ARTOU (artista originale uguale)
 Create or replace Function TracciaCover() returns Trigger as $TracciaCoverTrigger$
 DECLARE
 	TracciaOr Traccia.CodTC%Type;
-	ArtistaOr Artista.NomeArte%Type;
+	Cursor_ArtistiO refcursor;
+	ArtistiO record;
 BEGIN
 	
 	SELECT Traccia.CodTC into TracciaOr
 	FROM Produce, Traccia
 	Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
 
-	SELECT Artista.NomeArte into ArtistaOr
-	FROM Artista, Produce
-	Where Produce.CodT = TracciaOr and Produce.NomeArte = Artista.NomeArte;
-
-	if (ArtistaOr = new.NomeArte) then
-		delete from Produce where (CodT = New.CodT and NomeArte = new.NomeArte);
-	end if;
+	open Cursor_ArtistiO for 
+	SELECT Artista.NomeArte 
+	FROM Artista
+	Where Artista.NomeArte in (Select NomeArte from Produce where codt = TracciaOr);
 	
+	loop
+		fetch Cursor_ArtistiO into ArtistiO;
+		exit when not found;
+		
+		if(ArtistiO.NomeArte = New.NomeArte) then
+			raise exception using errcode = 'ARTOU';
+		end if;
+	end loop;
+	
+	close Cursor_ArtistiO;
 	Return null;
+	
+EXCEPTION 
+	when SQLSTATE 'ARTOU'then
+		raise notice 'ERRORE: artista originale uguale';
+		delete from Traccia where (CodT = New.CodT);
+		RETURN NULL;
 END;$TracciaCoverTrigger$ Language plpgsql;
 
+--Trigger per il terzo vincolo
+Create or replace Trigger TracciaCoverTrigger 
+After Insert on Produce
+FOR EACH ROW
+Execute procedure TracciaCover();
+
 --Quarto trigger: il formato della remastered deve essere maggiore di quella originale e l'anno deve essere maggiore dell'originale
+--CODICE ERRORE: FATRE (Formato anno remastered)
 Create or replace Function FormatoAnnoRemastered() returns Trigger as $FormatoAnnoRemasteredTrigger$
 DECLARE
 	FormatoO Traccia.Formato%Type;
@@ -71,19 +117,30 @@ BEGIN
 	Where Traccia.CodT = New.CodTR;
 	
 	if(FormatoO = 'MP3' and new.Formato = 'MP3')then
-		delete from Traccia where Codt = new.CodT;
+		raise exception using errcode = 'FATRE';
 	elseif(FormatoO = 'WAV' and (new.Formato = 'WAV' or new.Formato = 'MP3')) then
-		delete from Traccia where Codt = new.CodT;
+		raise exception using errcode = 'FATRE';
 	elseif (FormatoO = 'FLAC' and new.Formato <> 'FLAC') then
-		delete from Traccia where Codt = new.CodT;
+		raise exception using errcode = 'FATRE';
 	end if;
 	
 	if(New.AnnoU <= AnnoO) then
-		delete from Traccia where Codt = new.CodT;
+		raise exception using errcode = 'FATRE';
 	end if;
 	
 	Return null;
+EXCEPTION 
+	when SQLSTATE 'FATRE'then
+		raise notice 'ERRORE: formato o anno non consistenti';
+		delete from Traccia where (CodT = New.CodT);
+		RETURN NULL;
 END; $FormatoAnnoRemasteredTrigger$ Language plpgsql;
+
+--Trigger per il quarto vincolo
+Create or replace Trigger FormatoAnnoRemasteredTrigger 
+After Insert on Traccia
+FOR EACH ROW
+Execute procedure FormatoAnnoRemastered();
 
 --Quinto trigger: L'anno della cover deve essere maggiore uguale dell'originale e l'album di apparteneza deve essere diverso
 Create or replace Function AlbumAnnoCover() returns Trigger as $AlbumAnnoCoverTrigger$
@@ -105,31 +162,6 @@ BEGIN
 	
 	Return null;
 END; $AlbumAnnoCoverTrigger$ Language plpgsql;
-
---TRIGGER
---Trigger per il primo vincolo
-Create or replace Trigger AscoltiNoPremium 
-After Insert on Ascolta
-FOR EACH ROW
-Execute procedure UtentePremium();
-
---Trigger per il secondo vincolo
-Create or replace Trigger VotiNoPremium 
-After Insert on Vota
-FOR EACH ROW
-Execute procedure VotoUtentePremium();
-
---Trigger per il terzo vincolo
-Create or replace Trigger TracciaCoverTrigger 
-After Insert on Produce
-FOR EACH ROW
-Execute procedure TracciaCover();
-
---Trigger per il quarto vincolo
-Create or replace Trigger FormatoAnnoRemasteredTrigger 
-After Insert on Traccia
-FOR EACH ROW
-Execute procedure FormatoAnnoRemastered();
 
 --Trigger per il quinto vincolo
 Create or replace Trigger AlbumAnnoCoverTrigger 
