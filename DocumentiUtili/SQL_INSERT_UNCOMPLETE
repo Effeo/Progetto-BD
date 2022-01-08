@@ -4,7 +4,7 @@ INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('ColdPlay','Si divertono a creare generi, non aiutandoci a fare questo progetto...',DEFAULT);
 
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
-VALUES ('Silvio Barra','Se vi interessa sapere di piu c'e un sito di cui non ricordo il nome,cercate li',DEFAULT);
+VALUES ('Silvio Barra','Se vi interessa sapere di piu ce un sito di cui non ricordo il nome,cercate li',DEFAULT);
 
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
 VALUES ('USA for Africa','stanno carichi niente da dire',DEFAULT);
