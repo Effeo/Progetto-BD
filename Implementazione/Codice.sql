@@ -32,7 +32,7 @@ CREATE TABLE ALBUM (
 	Durata TIME DEFAULT '00:00:00',
 	Ntracce INTEGER DEFAULT 0,
 	Etichetta VARCHAR(20) DEFAULT NULL,
-	Voto NUMERIC(2,2) DEFAULT 0,
+	Voto INTEGER DEFAULT 0,
 	
 	PRIMARY KEY (CodA)
 );
@@ -49,7 +49,7 @@ CREATE TABLE TRACCIA (
 	Genere VARCHAR(30) NOT NULL,
 	Link VARCHAR(300),
 	Formato Type_Formato DEFAULT 'MP3',
-	Voto NUMERIC(2,2) DEFAULT 0,
+	Voto INTEGER DEFAULT 0,
 	Qualita Type_Qualita DEFAULT 128,
 	CodA INTEGER DEFAULT 0,
 	CodTR INTEGER DEFAULT 0,
@@ -151,7 +151,7 @@ CREATE TABLE CONTIENE (
 CREATE TABLE ARTISTA (
 	NomeArte VARCHAR(30),
 	Descrizione VARCHAR(300) DEFAULT NULL,
-	Voto NUMERIC(2,2) DEFAULT 0,
+	Voto INTEGER DEFAULT 0,
 
 	PRIMARY KEY(NomeArte)
 );
@@ -1346,3 +1346,93 @@ VALUES('Cristina Davena',82);
 
 INSERT INTO PRODUCE(NomeArte,CodT)
 VALUES('Giorgio Vanni',82);
+
+--ASCOLTI
+insert into Ascolta
+values ('Rami_Malek', 1, 1);
+insert into Ascolta
+values ('Rami_Malek', 4, 2);
+insert into Ascolta
+values ('Rami_Malek', 3, 1);
+insert into Ascolta
+values ('Rami_Malek', 6, 4);
+insert into Ascolta
+values ('Rami_Malek', 5, 6);
+insert into Ascolta
+values ('Rami_Malek', 77, 1);
+insert into Ascolta
+values ('Rami_Malek', 66, 5);
+insert into Ascolta
+values ('Lord_Pino', 14, 1);
+insert into Ascolta
+values ('Lord_Pino', 44, 2);
+insert into Ascolta
+values ('Lord_Pino', 32, 1);
+insert into Ascolta
+values ('Lord_Pino', 64, 4);
+insert into Ascolta
+values ('Lord_Pino', 55, 6);
+insert into Ascolta
+values ('Lord_Pino', 76, 1);
+insert into Ascolta
+values ('Lord_Pino', 63, 5);
+
+--VOTI
+insert into Vota
+values ('Rami_Malek', 1, 5);
+insert into Vota
+values ('Rami_Malek', 4, 6);
+insert into Vota
+values ('Rami_Malek', 3, 7);
+insert into Vota
+values ('Rami_Malek', 6, 8);
+insert into Vota
+values ('Rami_Malek', 5, 9);
+insert into Vota
+values ('Rami_Malek', 77, 10);
+insert into Vota
+values ('Rami_Malek', 66, 2);
+insert into Vota
+values ('Lord_Pino', 1, 4);
+insert into Vota
+values ('Lord_Pino', 4, 3);
+insert into Vota
+values ('Lord_Pino', 3, 2);
+insert into Vota
+values ('Lord_Pino', 6, 5);
+insert into Vota
+values ('Lord_Pino', 5, 6);
+insert into Vota
+values ('Lord_Pino', 77, 5);
+insert into Vota
+values ('Lord_Pino', 66, 7);
+
+--CONTIENE
+insert into Contiene
+values (1, 1);
+insert into Contiene
+values (1, 4);
+insert into Contiene
+values ('1', 3);
+insert into Contiene
+values (1, 6);
+insert into Contiene
+values (1, 5);
+insert into Contiene
+values (1, 77);
+insert into Contiene
+values (1, 66);
+insert into Contiene
+values (2, 11);
+insert into Contiene
+values (2, 42);
+insert into Contiene
+values ('2', 33);
+insert into Contiene
+values (2, 64);
+insert into Contiene
+values (2, 65);
+insert into Contiene
+values (2, 80);
+insert into Contiene
+values (2, 61);
