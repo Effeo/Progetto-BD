@@ -647,7 +647,7 @@ BEGIN
 		FROM Traccia
 		Where Traccia.CodT = New.CodTC;
 
-		if(CodAO = new.CodA or new.AnnoU < AnnoO) then
+		if((CodAO = new.CodA and CodAO <> 0) or new.AnnoU < AnnoO) then
 			raise exception using errcode = 'AANCO';
 		end if;
 	end if;
