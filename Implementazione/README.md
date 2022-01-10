@@ -15,8 +15,3 @@
 - [Creazione utente base fino alla riga 17](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/sql_user.sql#L1)
 - [Creazione utente premium fino alla riga 38](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/sql_user.sql#L19)
 - [Creazione utente admin fino alla riga 51](https://github.com/Effeo/Progetto-BD/blob/main/Implementazione/sql_user.sql#L40)
-
-### connessione
-username: UtenteAdmin 
-
-password: Admin
