@@ -666,6 +666,66 @@ After Insert on Traccia
 FOR EACH ROW
 Execute procedure AlbumAnnoCover();
 
+--Sesto vincolo: una traccia remastered deve essere prodotta dagli stessi artisti
+--CODICE ERRORE: ATRDO (artisti traccia remastered diversi dall'originale)
+Create or replace Function ArtistiUgualiRemastered() returns Trigger as $ArtistiUgualiRemasteredTrigger$
+DECLARE
+	TracciaOr Traccia.CodTC%Type;
+	Remastered Traccia.IsRemastered%Type;
+	Cursor_ArtistiO refcursor;
+	NArtO integer;
+	NArtODiversi integer;
+	ArtistiO record;
+BEGIN
+	SELECT Traccia.IsRemastered into Remastered
+	FROM Traccia
+	where Traccia.CodT = new.Codt;
+	
+	if(Remastered) then
+		SELECT Traccia.CodTC into TracciaOr
+		FROM Produce, Traccia
+		Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
+
+		open Cursor_ArtistiO for 
+		SELECT Artista.NomeArte 
+		FROM Artista
+		Where Artista.NomeArte in (Select NomeArte from Produce where codt = TracciaOr);
+		
+		NArtO := 0;
+		NArtODiversi := 0;
+		loop
+			fetch Cursor_ArtistiO into ArtistiO;
+			exit when not found;
+			
+			NArtO = NArtO + 1;
+			NArtODiversi := NArtODiversi + 1;
+			
+			if(ArtistiO.NomeArte = New.NomeArte) then
+				NArtODiversi := NArtODiversi - 1; 
+			end if;
+		end loop;
+		close Cursor_ArtistiO;
+		
+		if(NArtODiversi = NArtO) then
+			raise exception using errcode = 'ATRDO';
+		end if;
+		
+	end if;
+	Return null;
+	
+EXCEPTION 
+	when SQLSTATE 'ATRDO'then
+		raise notice 'ERRORE: artista originale uguale';
+		delete from Traccia where (CodT = New.CodT);
+		RETURN NULL;
+END;$ArtistiUgualiRemasteredTrigger$ Language plpgsql;
+
+--Trigger per il sesto vincolo
+Create or replace Trigger ArtistiUgualiRemasteredTrigger 
+After Insert on Produce
+FOR EACH ROW
+Execute procedure ArtistiUgualiRemastered();
+
 --POPOLAMENTO
 --ARTISTI
 INSERT INTO ARTISTA(NomeArte,Descrizione,Voto)
