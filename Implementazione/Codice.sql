@@ -673,8 +673,8 @@ DECLARE
 	TracciaOr Traccia.CodTC%Type;
 	Remastered Traccia.IsRemastered%Type;
 	Cursor_ArtistiO refcursor;
-	NArtO integer;
-	NArtODiversi integer;
+	NArtO float4 := 0;
+	NArtODiversi float4 := 0;
 	ArtistiO record;
 BEGIN
 	SELECT Traccia.IsRemastered into Remastered
@@ -682,7 +682,7 @@ BEGIN
 	where Traccia.CodT = new.Codt;
 	
 	if(Remastered) then
-		SELECT Traccia.CodTC into TracciaOr
+		SELECT Traccia.CodTR into TracciaOr
 		FROM Produce, Traccia
 		Where Produce.CodT = New.CodT and Traccia.CodT = New.CodT;
 
@@ -691,13 +691,11 @@ BEGIN
 		FROM Artista
 		Where Artista.NomeArte in (Select NomeArte from Produce where codt = TracciaOr);
 		
-		NArtO := 0;
-		NArtODiversi := 0;
 		loop
 			fetch Cursor_ArtistiO into ArtistiO;
 			exit when not found;
 			
-			NArtO = NArtO + 1;
+			NArtO := NArtO + 1;
 			NArtODiversi := NArtODiversi + 1;
 			
 			if(ArtistiO.NomeArte = New.NomeArte) then
@@ -715,7 +713,7 @@ BEGIN
 	
 EXCEPTION 
 	when SQLSTATE 'ATRDO'then
-		raise notice 'ERRORE: artista originale uguale';
+		raise notice 'ERRORE: artista originale diverso';
 		delete from Traccia where (CodT = New.CodT);
 		RETURN NULL;
 END;$ArtistiUgualiRemasteredTrigger$ Language plpgsql;
